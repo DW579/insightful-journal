@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+
+  <title>Insightful Journal</title>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link rel="stylesheet" href="libs/materialize/dist/css/materialize.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="sampleApp" ng-controller="NewEntryController">
+
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="#/" class="brand-logo">Insightful Journal</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#/newEntrys">NewEntrys</a></li>
+        <li><a href="#/profile">Profile</a></li>
+        <li><a href="#/login">Login/Sign Up</a></li>
+        <li><a href="#/import">Import</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div ng-view></div>
+
+  <script src="libs/angular/angular.js"></script>
+  <script src="libs/angular-route/angular-route.js"></script>
+  <script src="libs/materialize/dist/js/materialize.js"></script>
+  <script src="libs/anguvideo.js"></script>
+  <script src="libs/p5.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/appRoutes.js"></script>
+  <script src="js/controllers/MainCtrl.js"></script>
+  <script src="js/controllers/NewEntryCtrl.js"></script>
+  <script src="js/controllers/ProfileCtrl.js"></script>
+  <script src="js/controllers/LoginCtrl.js"></script>
+  <script src="js/controllers/ImportCtrl.js"></script>
+  <script src="js/services/NewEntryService.js"></script>
+  <script src="js/services/ImportService.js"></script>
+</body>
+</html>
