@@ -1,11 +1,20 @@
 angular.module('sampleApp').controller('NewEntryController', NewEntryController);
 
-NewEntryController.$inject = ['$scope', '$http', 'NewEntry'];
+NewEntryController.$inject = ['$scope', '$http', '$location', 'NewEntry'];
 
-function NewEntryController($scope, $http, NewEntry) {
+function NewEntryController($scope, $http, $location, NewEntry) {
 
   $scope.view = {
+    direction: '/profile',
+    switch: true,
+    journal: '',
+    titleEntry: '',
+    userEmotion: '',
+    folder: '',
+    area: false,
     file: '',
+    highestEmotionScore: 0,
+    highestEmotionTitle: '',
     emotion: '',
     anger: '',
     angerScore: 0,
@@ -48,6 +57,26 @@ function NewEntryController($scope, $http, NewEntry) {
     importText: ''
   };
 
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
+  $scope.go = function ( path ) {
+    $location.path( path );
+  };
+
+  $scope.journalAnswer = function() {
+    $scope.view.switch = false;
+  }
+
+  $scope.selectFolder = function() {
+
+  };
+
+  $scope.submitUserEmotion = function() {
+    $scope.view.area = true;
+  };
+
   $scope.fileUpload = function() {
     var inputFile = document.getElementById('fileItem').files[0].webkitRelativePath;
     NewEntry.uploadFile(inputFile).then(function(result) {
@@ -71,6 +100,23 @@ function NewEntryController($scope, $http, NewEntry) {
       $scope.view.joyScore = result.data.tone.document_tone.tone_categories[0].tones[3].score;
       $scope.view.sadness = result.data.tone.document_tone.tone_categories[0].tones[4].tone_name;
       $scope.view.sadnessScore = result.data.tone.document_tone.tone_categories[0].tones[4].score;
+
+      $scope.view.highestEmotionScore = Math.max($scope.view.angerScore, $scope.view.disgustScore, $scope.view.fearScore, $scope.view.joyScore, $scope.view.sadnessScore);
+      if($scope.view.highestEmotionScore === $scope.view.angerScore) {
+        $scope.view.highestEmotionTitle = "anger";
+      } else if($scope.view.highestEmotionScore === $scope.view.disgustScore) {
+        $scope.view.highestEmotionTitle = "disgust";
+      } else if($scope.view.highestEmotionScore === $scope.view.fearScore) {
+        $scope.view.highestEmotionTitle = "fear";
+      } else if($scope.view.highestEmotionScore === $scope.view.joyScore) {
+        $scope.view.highestEmotionTitle = "joy";
+      } else {
+        $scope.view.highestEmotionTitle = "sadness";
+      }
+
+      if($scope.view.highestEmotionTitle !== $scope.view.userEmotion) {
+        $scope.view.direction = '/explanation';
+      }
 
       $scope.view.language = result.data.tone.document_tone.tone_categories[1].category_name;
       $scope.view.analytical = result.data.tone.document_tone.tone_categories[1].tones[0].tone_name;
@@ -110,6 +156,18 @@ function NewEntryController($scope, $http, NewEntry) {
     .catch(error => {
       console.log(error);
     });
+  };
+
+  $scope.submitData = function() {
+    console.log($scope.view.folder);
+    console.log($scope.view.highestEmotionTitle);
+    console.log($scope.view.highestEmotionScore);
+
+  };
+
+  $scope.furtherExplanation = function() {
+    console.log("button was clicked");
+    console.log($scope.view.highestEmotionTitle);
   };
 
     // --------Use the personality anazlyze only for the overview of the persons notebook--------

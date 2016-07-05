@@ -1,147 +1,207 @@
 <div class="container">
-  <h1>New Entry</h1>
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <h5>How do you feel today?</h5>
-        <p>
-          <input class="with-gap" name="group1" type="radio" value="anger" id="anger" ng-model="userFeels" />
-          <label for="anger">Angery</label>
-        </p>
-        <p>
-          <input class="with-gap" name="group1" type="radio" value="disgust" id="disgust" ng-model="userFeels" />
-          <label for="disgust">Disgusted</label>
-        </p>
-        <p>
-          <input class="with-gap" name="group1" type="radio" value="fear" id="fear"  ng-model="userFeels" />
-          <label for="fear">Fearful</label>
-        </p>
-        <p>
-          <input class="with-gap" name="group1" type="radio" value="joy" id="joy" ng-model="userFeels" />
-          <label for="joy">Joyful</label>
-        </p>
-        <p>
-          <input class="with-gap" name="group1" type="radio" value="sadness" id="sadness" ng-model="userFeels" />
-          <label for="sadness">Sad</label>
-        </p>
-      </div>
+  <div class="row" ng-show="view.switch">
+    <h3>Will this be for your Journal?</h3>
+    <form ng-submit="journalAnswer()">
+      <p>
+        <input name="group1" type="radio" id="yes" value="yes" ng-model="view.journal" />
+        <label for="yes">Yes</label>
+      </p>
+      <p>
+        <input name="group1" type="radio" id="no" value="no" ng-model="view.journal" />
+        <label for="no">No</label>
+      </p>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
     </form>
   </div>
 
-  <div class="row">
-    <form ng-submit="fileUpload()">
-      <div class="file-field input-field">
-        <div class="btn">
-          <span>Folder</span>
-          <input id="fileItem" type="file" webkitdirectory>
+  <div class="row" ng-hide="view.switch">
+    <div class="row">
+      <form class="col s5" ng-show="view.journal === 'yes'" ng-submit="submitUserEmotion()">
+        <div class="row">
+          <h5>How do you feel today?</h5>
+          <p>
+            <input class="with-gap" name="group2" type="radio" value="anger" id="anger" ng-model="view.userEmotion" />
+            <label for="anger">Angery</label>
+          </p>
+          <p>
+            <input class="with-gap" name="group2" type="radio" value="disgust" id="disgust" ng-model="view.userEmotion" />
+            <label for="disgust">Disgusted</label>
+          </p>
+          <p>
+            <input class="with-gap" name="group2" type="radio" value="fear" id="fear"  ng-model="view.userEmotion" />
+            <label for="fear">Fearful</label>
+          </p>
+          <p>
+            <input class="with-gap" name="group2" type="radio" value="joy" id="joy" ng-model="view.userEmotion" />
+            <label for="joy">Joyful</label>
+          </p>
+          <p>
+            <input class="with-gap" name="group2" type="radio" value="sadness" id="sadness" ng-model="view.userEmotion" />
+            <label for="sadness">Sad</label>
+          </p>
         </div>
-        <div class="file-path-wrapper">
-          <input class="file-path validate" ng-model="view.file" type="text">
-        </div>
-      </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Upload Folder with File</button>
-    </form>
-  </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit Emotion</button>
+      </form>
+    </div>
 
-  <div class="row">
-    <form class="col s12" ng-submit="toneAnalyze()">
+    <div class="row" ng-show="view.area || view.journal === 'no'">
       <div class="row">
-        <div class="input-field col s6">
-          <input id="entryTitle" type="text" placeholder="Title Entry">
-          <label class="active" for="entryTitle"></label>
-        </div>
+        <form ng-submit="fileUpload()">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Folder</span>
+              <input id="fileItem" type="file" webkitdirectory>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" ng-model="view.file" type="text">
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" name="action">Upload Folder with File</button>
+        </form>
       </div>
+
       <div class="row">
-        <div class="input-field col s12">
-          <textarea ng-model='view.text' id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Enter your new entry below</label>
-        </div>
+        <form class="col s12" ng-submit="toneAnalyze()">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="entryTitle" type="text" ng-model="view.titleEntry" placeholder="Title Entry">
+              <label class="active" for="entryTitle"></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea ng-model='view.text' id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Enter your new entry below</label>
+            </div>
+          </div>
+          <button ng-click="view.loader = true" class="btn waves-effect waves-light" type="submit" name="action">Analyze Tone</button>
+        </form>
       </div>
-      <button ng-click="view.loader = true" class="btn waves-effect waves-light" type="submit" name="action">Analyze Tone</button>
-    </form>
-  </div>
+    </div>
 
-<!-- **** Preloder **** -->
-  <div class="row" ng-show="view.loader">
-    <div class="col s1 offset-s4">
-      <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
+  <!-- **** Preloder **** -->
+    <div class="row" ng-show="view.loader">
+      <div class="col s1 offset-s4">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="spinner-layer spinner-red">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="spinner-layer spinner-yellow">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="spinner-layer spinner-green">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row" ng-show="(view.emotion).length > 0">
-    <h5>{{ view.emotion }}</h5>
-    <p>{{ view.anger }}: {{ view.angerScore }}</p>
-    <p>{{ view.disgust }}: {{ view.disgustScore }}</p>
-    <p>{{ view.fear }}: {{ view.fearScore }}</p>
-    <p>{{ view.joy }}: {{ view.joyScore }}</p>
-    <p>{{ view.sadness }}: {{ view.sadnessScore }}</p>
+    <div class="row" ng-show="(view.emotion).length > 0">
+      <form ng-submit="submitData()">
+        <h5>{{ view.emotion }}</h5>
+        <p>{{ view.anger }}: {{ view.angerScore }}</p>
+        <p>{{ view.disgust }}: {{ view.disgustScore }}</p>
+        <p>{{ view.fear }}: {{ view.fearScore }}</p>
+        <p>{{ view.joy }}: {{ view.joyScore }}</p>
+        <p>{{ view.sadness }}: {{ view.sadnessScore }}</p>
 
-    <h5>{{ view.language }}</h5>
-    <p> {{ view.analytical }}: {{ view.analyticalScore }}</p>
-    <p> {{ view.confident }}: {{ view.confidentScore }}</p>
-    <p> {{ view.tentative }}: {{ view.tentativeScore }}</p>
+        <h5>{{ view.language }}</h5>
+        <p> {{ view.analytical }}: {{ view.analyticalScore }}</p>
+        <p> {{ view.confident }}: {{ view.confidentScore }}</p>
+        <p> {{ view.tentative }}: {{ view.tentativeScore }}</p>
 
-    <h5>{{ view.social }}</h5>
-    <p>{{ view.openness }}: {{ view.opennessScore }}</p>
-    <p>{{ view.conscientiousness }}: {{ view.conscientiousnessScore }}</p>
-    <p>{{ view.extraversion }}: {{ view.extraversionScore }}</p>
-    <p>{{ view.agreeableness }}: {{ view.agreeablenessScore }}</p>
-    <p>{{ view.emotionalRange }}: {{ view.emotionalRangeScore }}</p>
+        <h5>{{ view.social }}</h5>
+        <p>{{ view.openness }}: {{ view.opennessScore }}</p>
+        <p>{{ view.conscientiousness }}: {{ view.conscientiousnessScore }}</p>
+        <p>{{ view.extraversion }}: {{ view.extraversionScore }}</p>
+        <p>{{ view.agreeableness }}: {{ view.agreeablenessScore }}</p>
+        <p>{{ view.emotionalRange }}: {{ view.emotionalRangeScore }}</p>
 
-    <h5>Top Concept of Entry</h5>
-    <p>{{ view.topConceptLabel }}</p>
-    <a href="{{ view.topConceptLink }}">{{ view.topConceptLink }}</a>
-    <p>{{ view.topConceptAbstract }}</p>
+        <h5>Top Concept of Entry</h5>
+        <p>{{ view.topConceptLabel }}</p>
+        <a href="{{ view.topConceptLink }}">{{ view.topConceptLink }}</a>
+        <p>{{ view.topConceptAbstract }}</p>
 
-    <h5>First Video</h5>
-    <anguvideo ng-model="view.firstVideoId" width="100%" height="400"></anguvideo>
-    <h6>{{ view.firstVideoTitle }}</h6>
-    <p>{{ view.firstVideoDescription }}</p>
+        <h5>First Video</h5>
+        <anguvideo ng-model="view.firstVideoId" width="100%" height="400"></anguvideo>
+        <h6>{{ view.firstVideoTitle }}</h6>
+        <p>{{ view.firstVideoDescription }}</p>
 
-    <h5>Second Video</h5>
-    <anguvideo ng-model="view.secondVideoId" width="100%" height="400"></anguvideo>
-    <h6>{{ view.secondVideoTitle }}</h6>
-    <p>{{ view.secondVideoDescription }}</p>
+        <h5>Second Video</h5>
+        <anguvideo ng-model="view.secondVideoId" width="100%" height="400"></anguvideo>
+        <h6>{{ view.secondVideoTitle }}</h6>
+        <p>{{ view.secondVideoDescription }}</p>
+
+        <div class="row" ng-show="view.highestEmotionTitle !== view.userEmotion && view.journal === 'yes'">
+          <h3>Please further explain the difference</h3>
+          <span>There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference.</span>
+          <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>
+
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea ng-model='view.explanationEntry' id="textareaExplanation" class="materialize-textarea"></textarea>
+                  <label for="textareaExplanation">Enter your explanation below</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <h5>Select Folder to Save Entry</h5>
+          <p>
+            <input name="group3" type="radio" id="journal" value="journal" ng-model="view.folder" />
+            <label for="journal">Journal</label>
+          </p>
+          <p>
+            <input name="group3" type="radio" id="notebook" value="notebook" ng-model="view.folder" />
+            <label for="notebook">Notebook</label>
+          </p>
+          <p>
+            <input name="group3" type="radio" id="work" value="work" ng-model="view.folder"  />
+            <label for="work">Work</label>
+          </p>
+          <p>
+            <input name="group3" type="radio" id="ideas" value="ideas" ng-model="view.folder" />
+            <label for="ideas">Ideas</label>
+          </p>
+        </div>
+
+        <button class="waves-effect waves-light btn" type="submit" ng-click="go('/profile')"><i class="material-icons right">cloud</i>Save Analysis</button>
+      </form>
+    </div>
   </div>
 
 </div>

@@ -27,6 +27,11 @@ angular.module('sampleApp').config(['$routeProvider', '$locationProvider', funct
         .when('/import', {
           templateUrl: 'views/import.html',
           controller: 'ImportController'
+        })
+
+        .when('/explanation', {
+          templateUrl: 'views/explanation.html',
+          controller: 'NewEntryController'
         });
 
     // $locationProvider.html5Mode(true);

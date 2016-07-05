@@ -1,0 +1,17 @@
+<div class="container">
+  <h3>Please further explain the difference</h3>
+  <span>There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference.</span>
+  <span>You stated you feel {{ view.userEmotion }} today. Watson anazlyed your entry and finds that the text represents the feeling of {{ view.highestEmotionTitle }}</span>
+
+  <div class="row">
+    <form class="col s12" ng-submit="furtherExplanation()">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea ng-model='view.explanationEntry' id="textareaExplanation" class="materialize-textarea"></textarea>
+          <label for="textareaExplanation">Enter your explanation below</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit Explanation</button>
+    </form>
+  </div>
+</div>
