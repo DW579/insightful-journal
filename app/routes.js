@@ -208,11 +208,35 @@ function youTubeContent(label) {
         });
 
         app.post('/api/results', function(req, res) {
-          console.log(req.body.results);
-          // knex('entries').insert({entry_content: req.body.results}, '*').then(function(data) {
-          //   console.log(data);
+          knex('entries').insert({
+            folder: req.body.results.folder,
+            entry_content: req.body.results.entry_content,
+            user_emotion: req.body.results.user_emotion,
+            anger_score: req.body.results.anger_score,
+            disgust_score: req.body.results.disgust_score,
+            fear_score: req.body.results.fear_score,
+            joy_score: req.body.results.joy_score,
+            sadness_score: req.body.results.sadness_score,
+            analytical_score: req.body.results.analytical_score,
+            confident_score: req.body.results.confident_score,
+            tentative_score: req.body.results.tentative_score,
+            openness_score: req.body.results.openness_score,
+            conscientiousness_score: req.body.results.conscientiousness_score,
+            extraversion_score: req.body.results.extraversion_score,
+            agreeableness_score: req.body.results.agreeableness_score,
+            emotional_range_score: req.body.results.emotional_range_score,
+            top_concept_title: req.body.results.top_concept_title,
+            top_concept_link: req.body.results.top_concept_title,
+            top_concept_description: req.body.results.top_concept_description,
+            first_video_link: req.body.results.first_video_link,
+            first_video_title: req.body.results.first_video_title,
+            first_video_description: req.body.results.first_video_description,
+            second_video_link: req.body.results.second_video_link,
+            second_video_title: req.body.results.second_video_title,
+            second_video_description: req.body.results.second_video_description}, '*').then(function(data) {
+            console.log(data);
             // process.exit(1);
-          // });
+          });
         });
 
 
