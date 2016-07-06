@@ -1,4 +1,3 @@
-// grab the NewEntry model we just created
 var NewEntry = require('./models/newEntry');
 var watson = require('watson-developer-cloud');
 var YouTube = require('youtube-node');
@@ -211,7 +210,7 @@ function youTubeContent(label) {
         app.post('/api/results', function(req, res) {
           knex('entries').insert({entry_content: req.body.results}, '*').then(function(data) {
             console.log(data);
-            process.exit(1);
+            // process.exit(1);
           });
         });
 

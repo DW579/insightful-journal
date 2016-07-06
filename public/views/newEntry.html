@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="NewEntryController">
   <div class="row" ng-show="view.switch">
     <h3>Will this be for your Journal?</h3>
     <form ng-submit="journalAnswer()">
@@ -125,26 +125,19 @@
       </div>
     </div>
 
-    <div class="row" ng-show="(view.emotion).length > 0">
+    <div class="row" ng-show="(view.language).length > 0">
       <form ng-submit="submitData()">
-        <h5>{{ view.emotion }}</h5>
-        <p>{{ view.anger }}: {{ view.angerScore }}</p>
-        <p>{{ view.disgust }}: {{ view.disgustScore }}</p>
-        <p>{{ view.fear }}: {{ view.fearScore }}</p>
-        <p>{{ view.joy }}: {{ view.joyScore }}</p>
-        <p>{{ view.sadness }}: {{ view.sadnessScore }}</p>
-
-        <h5>{{ view.language }}</h5>
-        <p> {{ view.analytical }}: {{ view.analyticalScore }}</p>
-        <p> {{ view.confident }}: {{ view.confidentScore }}</p>
-        <p> {{ view.tentative }}: {{ view.tentativeScore }}</p>
-
-        <h5>{{ view.social }}</h5>
-        <p>{{ view.openness }}: {{ view.opennessScore }}</p>
-        <p>{{ view.conscientiousness }}: {{ view.conscientiousnessScore }}</p>
-        <p>{{ view.extraversion }}: {{ view.extraversionScore }}</p>
-        <p>{{ view.agreeableness }}: {{ view.agreeablenessScore }}</p>
-        <p>{{ view.emotionalRange }}: {{ view.emotionalRangeScore }}</p>
+        <div class="row">
+          <table class="columns">
+            <tr>
+              <td><div id="barchart_emotion" style="border: 1px solid #ccc, width: 100%"></div></td>
+              <td><div id="barchart_language" style="border: 1px solid #ccc, width: 100%"></div></td>
+            </tr>
+            <tr>
+              <td><div id="barchart_social" style="border: 1px solid #ccc, width: 100%"></div></td>
+            </tr>
+          </table>
+        </div>
 
         <h5>Top Concept of Entry</h5>
         <p>{{ view.topConceptLabel }}</p>

@@ -6,6 +6,8 @@
     "font-awesome": "latest",
     "animate.css": "latest",
     "angular": "latest",
-    "angular-route": "latest"
-    }
+    "angular-route": "latest",
+    "chartist": "^0.9.8",
+    "angular-google-chart": "^0.1.0"
+  }
 }

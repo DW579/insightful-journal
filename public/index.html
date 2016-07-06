@@ -1,17 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="sampleApp">
 <head>
   <meta charset="UTF-8">
   <base href="/">
 
   <title>Insightful Journal</title>
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <link rel="stylesheet" href="libs/materialize/dist/css/materialize.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body ng-app="sampleApp" ng-controller="NewEntryController">
+<body>
 
   <nav>
     <div class="nav-wrapper container">
@@ -31,7 +32,6 @@
   <script src="libs/angular-route/angular-route.js"></script>
   <script src="libs/materialize/dist/js/materialize.js"></script>
   <script src="libs/anguvideo.js"></script>
-  <script src="libs/p5.js"></script>
 
   <script src="js/app.js"></script>
   <script src="js/appRoutes.js"></script>
@@ -43,5 +43,6 @@
   <script src="js/controllers/ExplanationCtrl.js"></script>
   <script src="js/services/NewEntryService.js"></script>
   <script src="js/services/ImportService.js"></script>
+  <script src="js/services/ProfileService.js"></script>
 </body>
 </html>
