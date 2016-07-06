@@ -28,6 +28,14 @@ angular.module('sampleApp').factory('NewEntry', ['$http', function($http) {
           });
         },
 
+        sendData: function(test) {
+          return $http({
+            url: '/api/results',
+            method: 'POST',
+            data: {results: test}
+          })
+        },
+
         // createPersonality: function(textInput) {
         //   return $http({
         //     url: '/api/watson',

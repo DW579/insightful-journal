@@ -159,15 +159,10 @@ function NewEntryController($scope, $http, $location, NewEntry) {
   };
 
   $scope.submitData = function() {
-    console.log($scope.view.folder);
-    console.log($scope.view.highestEmotionTitle);
-    console.log($scope.view.highestEmotionScore);
-
-  };
-
-  $scope.furtherExplanation = function() {
-    console.log("button was clicked");
-    console.log($scope.view.highestEmotionTitle);
+    var test = $scope.view.text;
+    NewEntry.sendData(test).then(function(result) {
+      console.log(result);
+    });
   };
 
     // --------Use the personality anazlyze only for the overview of the persons notebook--------

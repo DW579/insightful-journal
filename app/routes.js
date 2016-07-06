@@ -5,6 +5,7 @@ var YouTube = require('youtube-node');
 const Promise = require('bluebird');
 var fs = require('fs');
 var dotenv = require('dotenv').config();
+var knex = require('../db/knex');
 
 var speech_to_text = watson.speech_to_text({
   username: dotenv.SPEECHTEXTUSERNAME,
@@ -205,6 +206,13 @@ function youTubeContent(label) {
           function onEvent(name, event) {
               console.log(name, JSON.stringify(event, null, 2));
           }
+        });
+
+        app.post('/api/results', function(req, res) {
+          knex('entries').insert({entry_content: req.body.results}, '*').then(function(data) {
+            console.log(data);
+            process.exit(1);
+          });
         });
 
 

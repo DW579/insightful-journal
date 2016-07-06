@@ -79,7 +79,6 @@
       </div>
     </div>
 
-  <!-- **** Preloder **** -->
     <div class="row" ng-show="view.loader">
       <div class="col s1 offset-s4">
         <div class="preloader-wrapper big active">
@@ -168,14 +167,10 @@
           <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>
 
           <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea ng-model='view.explanationEntry' id="textareaExplanation" class="materialize-textarea"></textarea>
-                  <label for="textareaExplanation">Enter your explanation below</label>
-                </div>
-              </div>
-            </form>
+            <div class="input-field col s12">
+              <textarea ng-model='view.explanationEntry' id="textareaExplanation" class="materialize-textarea"></textarea>
+              <label for="textareaExplanation">Enter your explanation below</label>
+            </div>
           </div>
         </div>
 
