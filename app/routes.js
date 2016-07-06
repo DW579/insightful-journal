@@ -208,10 +208,11 @@ function youTubeContent(label) {
         });
 
         app.post('/api/results', function(req, res) {
-          knex('entries').insert({entry_content: req.body.results}, '*').then(function(data) {
-            console.log(data);
+          console.log(req.body.results);
+          // knex('entries').insert({entry_content: req.body.results}, '*').then(function(data) {
+          //   console.log(data);
             // process.exit(1);
-          });
+          // });
         });
 
 

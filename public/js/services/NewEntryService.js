@@ -28,11 +28,11 @@ angular.module('sampleApp').factory('NewEntry', ['$http', function($http) {
           });
         },
 
-        sendData: function(test) {
+        sendData: function(entryData) {
           return $http({
             url: '/api/results',
             method: 'POST',
-            data: {results: test}
+            data: {results: entryData}
           })
         },
 

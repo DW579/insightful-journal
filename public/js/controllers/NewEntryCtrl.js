@@ -173,6 +173,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
           ["Emotion", "Score", { role: "style" } ],
           ["Anger", $scope.view.angerScore, "#b87333"],
           ["Disgust", $scope.view.disgustScore, "silver"],
+          ["Fear", $scope.view.fearScore, "silver"],
           ["Joy", $scope.view.joyScore, "gold"],
           ["Sadness", $scope.view.sadnessScore, "color: #e5e4e2"]
         ]);
@@ -259,8 +260,35 @@ function NewEntryController($scope, $http, $location, NewEntry) {
 
 
   $scope.submitData = function() {
-    var test = $scope.view.text;
-    NewEntry.sendData(test).then(function(result) {
+    var entryData = {
+      folder: $scope.view.folder,
+      entry_content: $scope.view.text,
+      user_emotion: $scope.view.userEmotion,
+      anger_score: $scope.view.angerScore,
+      disgust_score: $scope.view.disgustScore,
+      fear_score: $scope.view.fearScore,
+      joy_score: $scope.view.joyScore,
+      sadness_score: $scope.view.sadnessScore,
+      analytical_score: $scope.view.analyticalScore,
+      confident_score: $scope.view.confidentScore,
+      tentative_score: $scope.view.tentativeScore,
+      openness_score: $scope.view.opennessScore,
+      conscientiousness_score: $scope.view.conscientiousnessScore,
+      extraversion_score: $scope.view.extraversionScore,
+      agreeableness_score: $scope.view.agreeablenessScore,
+      emotional_range_score: $scope.view.emotionalRangeScore,
+      top_concept_title: $scope.view.topConceptLabel,
+      top_concept_link: $scope.view.topConceptLink,
+      top_concept_description: $scope.view.topConceptAbstract,
+      first_video_link: $scope.view.firstVideoId,
+      first_video_title: $scope.view.firstVideoTitle,
+      first_video_description: $scope.view.firstVideoDescription,
+      second_video_link: $scope.view.secondVideoId,
+      second_video_title: $scope.view.secondVideoTitle,
+      second_video_description: $scope.view.secondVideoDescription
+    };
+    
+    NewEntry.sendData(entryData).then(function(result) {
       console.log(result);
     });
   };
