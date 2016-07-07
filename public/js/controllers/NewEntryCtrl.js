@@ -74,7 +74,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
   $scope.fileUpload = function() {
     var inputFile = document.getElementById('fileItem').files[0].webkitRelativePath;
     NewEntry.uploadFile(inputFile).then(function(result) {
-      console.log(result);
       $scope.view.text = result.data.answer_units[0].content[0].text;
     });
   };
@@ -287,7 +286,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       second_video_title: $scope.view.secondVideoTitle,
       second_video_description: $scope.view.secondVideoDescription
     };
-    
+
     NewEntry.sendData(entryData).then(function(result) {
       console.log(result);
     });

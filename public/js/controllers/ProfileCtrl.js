@@ -1,19 +1,18 @@
 angular.module('sampleApp').controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', '$http', 'Profile'];
+ProfileController.$inject = ['$scope', '$http', '$sce', '$sceDelegate', 'Profile'];
 
-function ProfileController($scope, $http, Profile) {
+function ProfileController($scope, $http, $sce, $sceDelegate, Profile) {
 
   $scope.view = {
-    dataArray: []
+    dataArray: [],
+    filterEntry: 0
   };
-
-  // var dataArray = [];
 
   $(document).ready(function(){
     $('ul.tabs').tabs();
   });
-
+  
   $scope.allData = function() {
     console.log("page loaded!");
     Profile.getData().then(function(result) {
