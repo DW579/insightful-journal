@@ -125,6 +125,13 @@ function youTubeContent(label) {
             });
         });
 
+        app.get('/api/data', function(req, res) {
+          knex('entries').select().then(function(data) {
+            res.send(data);
+            // process.exit(1);
+          });
+        });
+
         function conceptData(text) {
           return initalConceptHighlights(text).then(initialConcept => {
             var arrayConcept = [];
@@ -238,8 +245,6 @@ function youTubeContent(label) {
             // process.exit(1);
           });
         });
-
-
 
         // app.post('/api/watson', function(req, res) {
         //   var personality_insights = watson.personality_insights({
