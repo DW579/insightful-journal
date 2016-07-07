@@ -5,16 +5,23 @@ ProfileController.$inject = ['$scope', '$http', 'Profile'];
 function ProfileController($scope, $http, Profile) {
 
   $scope.view = {
-    
-  }
+    dataArray: []
+  };
+
+  // var dataArray = [];
+
   $(document).ready(function(){
-  $('ul.tabs').tabs();
+    $('ul.tabs').tabs();
   });
 
   $scope.allData = function() {
     console.log("page loaded!");
     Profile.getData().then(function(result) {
       console.log(result);
+      for(var i = 0; i < (result.data).length; i++) {
+        $scope.view.dataArray.push(result.data[i]);
+      }
+      console.log($scope.view.dataArray);
     });
   };
   // google.charts.load("current", {"packages":["corechart"]});
