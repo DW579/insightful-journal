@@ -6,8 +6,6 @@ angular.module('sampleApp').factory('NewEntry', ['$http', function($http) {
             return $http.get('/api/newEntrys');
         },
 
-                // these will work when more API routes are defined on the Node side of things
-        // call to POST and create a new NewEntry
         create : function(newEntryData) {
             return $http.post('/api/newEntrys', newEntryData);
         },

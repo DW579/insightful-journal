@@ -1,66 +1,64 @@
 angular.module('sampleApp').controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', '$http', '$sce', '$sceDelegate', 'Profile'];
+ProfileController.$inject = ['$scope', '$http', 'Profile'];
 
-function ProfileController($scope, $http, $sce, $sceDelegate, Profile) {
+function ProfileController($scope, $http, Profile) {
 
   $scope.view = {
     dataArray: [],
-    filterEntry: 0
+    filterEntry: 0,
+    journalArray: [],
+    notebookArray: [],
+    jobArray: [],
+    ideasArray: []
   };
 
   $(document).ready(function(){
     $('ul.tabs').tabs();
   });
-  
+
+  var journalData;
+  var notebookData;
+  var jobData;
+  var ideasData;
+
   $scope.allData = function() {
-    console.log("page loaded!");
     Profile.getData().then(function(result) {
-      console.log(result);
       for(var i = 0; i < (result.data).length; i++) {
         $scope.view.dataArray.push(result.data[i]);
+        if(result.data[i].folder === 'journal') {
+          $scope.view.journalArray.push(result.data[i].entry_content);
+        }
+        else if(result.data[i].folder === 'notebook') {
+          $scope.view.notebookArray.push(result.data[i].entry_content);
+        }
+        else if(result.data[i].folder === 'job') {
+          $scope.view.jobArray.push(result.data[i].entry_content);
+        }
+        else if(result.data[i].folder === 'ideas') {
+          $scope.view.ideasArray.push(result.data[i].entry_content);
+        }
+        else {
+          console.log("Did not match any folders");
+        }
       }
-      console.log($scope.view.dataArray);
+      journalData = $scope.view.journalArray.join(" ");
+      notebookData = $scope.view.notebookArray.join(" ");
+      jobData = $scope.view.jobArray.join(" ");
+      ideasData = $scope.view.ideasArray.join(" ");
+
+      Profile.createJournal(journalData).then(function(result) {
+        console.log(result.data);
+      });
+      Profile.personalityNotebook(notebookData).then(function(result) {
+        console.log(result.data);
+      });
+      Profile.personalityJob(jobData).then(function(result) {
+        console.log(result.data);
+      });
+      Profile.personalityIdeas(ideasData).then(function(result) {
+        console.log(result.data);
+      });
     });
   };
-  // google.charts.load("current", {"packages":["corechart"]});
-  // google.charts.setOnLoadCallback(watsonChart);
-  // google.charts.setOnLoadCallback(userChart);
-  //
-  // function watsonChart() {
-  //   var data = google.visualization.arrayToDataTable([
-  //     ['Task', 'Hours per Day'],
-  //     ['Work',     11],
-  //     ['Eat',      2],
-  //     ['Commute',  2],
-  //     ['Watch TV', 2],
-  //     ['Sleep',    7]
-  //   ]);
-  //
-  //   var options = {
-  //     pieHole: 0.4
-  //   };
-  //
-  //   var chart = new google.visualization.PieChart(document.getElementById('watson_chart'));
-  //   chart.draw(data, options);
-  // }
-  //
-  // function userChart() {
-  //   var data = google.visualization.arrayToDataTable([
-  //     ['Task', 'Hours per Day'],
-  //     ['Work',     11],
-  //     ['Eat',      2],
-  //     ['Commute',  2],
-  //     ['Watch TV', 2],
-  //     ['Sleep',    7]
-  //   ]);
-  //
-  //   var options = {
-  //     pieHole: 0.4
-  //   };
-  //
-  //   var chart = new google.visualization.PieChart(document.getElementById('user_chart'));
-  //   chart.draw(data, options);
-  // }
-
 }

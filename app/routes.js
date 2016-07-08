@@ -6,12 +6,6 @@ var fs = require('fs');
 var dotenv = require('dotenv').config();
 var knex = require('../db/knex');
 
-var speech_to_text = watson.speech_to_text({
-  username: dotenv.SPEECHTEXTUSERNAME,
-  password: dotenv.SPEECHTEXTPASSWORD,
-  version: 'v1'
-});
-
 var tone_analyzer = watson.tone_analyzer({
   username: dotenv.TONEANALYZERUSERNAME,
   password: dotenv.TONEANALYZERPASSWORD,
@@ -30,6 +24,12 @@ var document_conversion = watson.document_conversion({
   password: dotenv.DOCUMENTCONVERSIONPASSWORD,
   version: 'v1',
   version_date: '2015-12-15'
+});
+
+var personality_insights = watson.personality_insights({
+  username: dotenv.PERSONALITYUSERNAME,
+  password: dotenv.PERSONALITYPASSWORD,
+  version: 'v2'
 });
 
 function toneAnalyze(text) {
@@ -181,52 +181,23 @@ function youTubeContent(label) {
           });
         });
 
-        // ******* Test for Speech to Text**********
-
-        app.post('/api/audio', function(req, res) {
-          var params = {
-            content_type: 'audio/basic',
-            continuous: true,
-            interim_results: true
-          };
-
-          // Create the stream.
-          var recognizeStream = speech_to_text.createRecognizeStream(params);
-
-          // Pipe in the audio.
-          fs.createReadStream(req.body.audio).pipe(recognizeStream);
-
-          // Pipe out the transcription to a file.
-          recognizeStream.pipe(fs.createWriteStream('transcription.txt'));
-
-          // Get strings instead of buffers from 'data' events.
-          recognizeStream.setEncoding('utf8');
-
-          // Listen for events.
-          recognizeStream.on('data', function(event) { onEvent('Data:', event); });
-          recognizeStream.on('results', function(event) { onEvent('Results:', event); });
-          recognizeStream.on('error', function(event) { onEvent('Error:', event); });
-          recognizeStream.on('close-connection', function(event) { onEvent('Close:', event); });
-
-          // Displays events on the console.
-          function onEvent(name, event) {
-              console.log(name, JSON.stringify(event, null, 2));
-          }
-        });
-
         app.post('/api/results', function(req, res) {
           knex('entries').insert({
             folder: req.body.results.folder,
+            title_entry: req.body.results.title_entry,
             entry_content: req.body.results.entry_content,
             user_emotion: req.body.results.user_emotion,
+            highest_emotion: req.body.results.highest_emotion,
             anger_score: req.body.results.anger_score,
             disgust_score: req.body.results.disgust_score,
             fear_score: req.body.results.fear_score,
             joy_score: req.body.results.joy_score,
             sadness_score: req.body.results.sadness_score,
+            highest_language: req.body.results.highest_language,
             analytical_score: req.body.results.analytical_score,
             confident_score: req.body.results.confident_score,
             tentative_score: req.body.results.tentative_score,
+            highest_social: req.body.results.highest_social,
             openness_score: req.body.results.openness_score,
             conscientiousness_score: req.body.results.conscientiousness_score,
             extraversion_score: req.body.results.extraversion_score,
@@ -240,32 +211,76 @@ function youTubeContent(label) {
             first_video_description: req.body.results.first_video_description,
             second_video_link: req.body.results.second_video_link,
             second_video_title: req.body.results.second_video_title,
-            second_video_description: req.body.results.second_video_description}, '*').then(function(data) {
-            console.log(data);
-            // process.exit(1);
+            second_video_description: req.body.results.second_video_description,
+            explanation_entry: req.body.results.explanation_entry
+          }, '*').then(function(data) {
+            res.send(data);
           });
         });
 
-        // app.post('/api/watson', function(req, res) {
-        //   var personality_insights = watson.personality_insights({
-        //     username: '6969bf03-7f52-4f92-948b-e810e409934a',
-        //     password: 'vFYYPPhvhtEv',
-        //     version: 'v2'
-        //   });
-        //
-        //   // var params = require('profile.json');
-        //
-        //   personality_insights.profile({text: req.body.text},
-        //     function(error, response) {
-        //     if (error) {
-        //       console.log('error:', error);
-        //     }
-        //     else {
-        //       // console.log(JSON.stringify(response, null, 2));
-        //       res.json(response);
-        //     }
-        //   });
-        // });
+        app.post('/api/personalityJournal', function(req, res) {
+
+          // var params = require('profile.json');
+
+          personality_insights.profile({text: req.body.data},
+            function(error, response) {
+            if (error) {
+              console.log('error:', error);
+              res.send(error);
+            }
+            else {
+              res.json(response);
+            }
+          });
+        });
+
+        app.post('/api/personalityNotebook', function(req, res) {
+
+          // var params = require('profile.json');
+
+          personality_insights.profile({text: req.body.data},
+            function(error, response) {
+            if (error) {
+              console.log('error:', error);
+              res.send(error);
+            }
+            else {
+              res.send(JSON.stringify(response));
+            }
+          });
+        });
+
+        app.post('/api/personalityJob', function(req, res) {
+
+          // var params = require('profile.json');
+
+          personality_insights.profile({text: req.body.data},
+            function(error, response) {
+            if (error) {
+              console.log('error:', error);
+              res.send(error);
+            }
+            else {
+              res.send(JSON.stringify(response));
+            }
+          });
+        });
+
+        app.post('/api/personalityIdeas', function(req, res) {
+
+          // var params = require('profile.json');
+
+          personality_insights.profile({text: req.body.data},
+            function(error, response) {
+            if (error) {
+              console.log('error:', error);
+              res.send(error);
+            }
+            else {
+              res.send(JSON.stringify(response));
+            }
+          });
+        });
 
         // route to handle creating goes here (app.post)
         // route to handle delete goes here (app.delete)

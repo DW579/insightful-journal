@@ -20,6 +20,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     joyScore: 0,
     sadnessScore: 0,
     language: '',
+    highestLanguageScore: 0,
+    highestLanguageTitle: '',
     analytical: '',
     analyticalScore: 0,
     confident: '',
@@ -27,6 +29,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     tentative: '',
     tentativeScore: 0,
     social: '',
+    highestSocialScore: 0,
+    highestSocialTitle: '',
     openness: '',
     opennessScore: 0,
     conscientiousness: '',
@@ -47,7 +51,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     secondVideoTitle: '',
     secondVideoDescription: '',
     loader: false,
-    importText: ''
+    explanationEntry: ''
   };
 
 
@@ -61,10 +65,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
 
   $scope.journalAnswer = function() {
     $scope.view.switch = false;
-  }
-
-  $scope.selectFolder = function() {
-
   };
 
   $scope.submitUserEmotion = function() {
@@ -110,6 +110,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         $scope.view.highestEmotionTitle = "sadness";
       }
 
+      console.log($scope.view.highestEmotionTitle);
+
       if($scope.view.highestEmotionTitle !== $scope.view.userEmotion) {
         $scope.view.direction = '/explanation';
       }
@@ -124,6 +126,16 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       $scope.view.tentativeScore = result.data.tone.document_tone.tone_categories[1].tones[2].score;
       $scope.view.tentativeScore /= Math.pow(100, -1);
       $scope.view.tentativeScore = Math.round($scope.view.tentativeScore);
+
+      $scope.view.highestLanguageScore = Math.max($scope.view.analyticalScore, $scope.view.confidentScore, $scope.view.tentativeScore);
+      if($scope.view.highestLanguageScore === $scope.view.analyticalScore) {
+        $scope.view.highestLanguageTitle = 'analytical';
+      } else if($scope.view.highestLanguageScore === $scope.view.confidentScore) {
+        $scope.view.highestLanguageTitle = 'confident';
+      } else {
+        $scope.view.highestLanguageTitle = 'tentative';
+      }
+      console.log($scope.view.highestLanguageTitle);
 
       $scope.view.social = result.data.tone.document_tone.tone_categories[2].category_name;
       $scope.view.openness = result.data.tone.document_tone.tone_categories[2].tones[0].tone_name;
@@ -142,10 +154,23 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       $scope.view.agreeablenessScore = result.data.tone.document_tone.tone_categories[2].tones[3].score;
       $scope.view.agreeablenessScore /= Math.pow(100, -1);
       $scope.view.agreeablenessScore = Math.round($scope.view.agreeablenessScore);
+
       $scope.view.emotionalRange = result.data.tone.document_tone.tone_categories[2].tones[4].tone_name;
       $scope.view.emotionalRangeScore = result.data.tone.document_tone.tone_categories[2].tones[4].score;
       $scope.view.emotionalRangeScore /= Math.pow(100, -1);
       $scope.view.emotionalRangeScore = Math.round($scope.view.emotionalRangeScore);
+
+      $scope.view.highestSocialScore = Math.max($scope.view.opennessScore, $scope.view.conscientiousnessScore, $scope.view.extraversionScore, $scope.view.agreeablenessScore);
+      if($scope.view.highestSocialScore === $scope.view.opennessScore) {
+        $scope.view.highestSocialTitle = 'openness';
+      } else if($scope.view.highestSocialScore === $scope.view.conscientiousnessScore) {
+        $scope.view.highestSocialTitle = 'conscientiousness';
+      } else if($scope.view.highestSocialScore === $scope.view.extraversionScore) {
+        $scope.view.highestSocialTitle = 'extraversion';
+      } else {
+        $scope.view.highestSocialTitle = 'agreeableness';
+      }
+      console.log($scope.view.highestSocialTitle);
 
       $scope.view.topConceptLabel = result.data.concepts.conceptData.label;
       $scope.view.topConceptLink = result.data.concepts.conceptData.link;
@@ -261,16 +286,20 @@ function NewEntryController($scope, $http, $location, NewEntry) {
   $scope.submitData = function() {
     var entryData = {
       folder: $scope.view.folder,
+      title_entry: $scope.view.titleEntry,
       entry_content: $scope.view.text,
       user_emotion: $scope.view.userEmotion,
+      highest_emotion: $scope.view.highestEmotionTitle,
       anger_score: $scope.view.angerScore,
       disgust_score: $scope.view.disgustScore,
       fear_score: $scope.view.fearScore,
       joy_score: $scope.view.joyScore,
       sadness_score: $scope.view.sadnessScore,
+      highest_language: $scope.view.highestLanguageTitle,
       analytical_score: $scope.view.analyticalScore,
       confident_score: $scope.view.confidentScore,
       tentative_score: $scope.view.tentativeScore,
+      highest_social: $scope.view.highestSocialTitle,
       openness_score: $scope.view.opennessScore,
       conscientiousness_score: $scope.view.conscientiousnessScore,
       extraversion_score: $scope.view.extraversionScore,
@@ -284,7 +313,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       first_video_description: $scope.view.firstVideoDescription,
       second_video_link: $scope.view.secondVideoId,
       second_video_title: $scope.view.secondVideoTitle,
-      second_video_description: $scope.view.secondVideoDescription
+      second_video_description: $scope.view.secondVideoDescription,
+      explanation_entry: $scope.view.explanationEntry
     };
 
     NewEntry.sendData(entryData).then(function(result) {
