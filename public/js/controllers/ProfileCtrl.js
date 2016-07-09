@@ -93,7 +93,23 @@ function ProfileController($scope, $http, Profile) {
     ideasDisgustArray: [],
     ideasFearArray: [],
     ideasJoyArray: [],
-    ideasSadnessArray: []
+    ideasSadnessArray: [],
+
+    ideasAllTopLanguagesArray: [],
+    ideasAnalyticalArray: [],
+    ideasConfidentArray: [],
+    ideasTentativeArray: [],
+    ideasHighestLanguageTotal: 0,
+    ideasOverallLanguage: '',
+
+    ideasAllTopSocialArray: [],
+    ideasOpennessArray: [],
+    ideasConscientiousnessArray: [],
+    ideasExtraversionArray: [],
+    ideasAgreeablenessArray: [],
+    ideasEmotionalRangeArray: [],
+    ideasHighestSocialTotal: 0,
+    ideasOverallSocial: ''
   };
 
   $(document).ready(function(){
@@ -411,7 +427,66 @@ function ProfileController($scope, $http, Profile) {
       else if($scope.view.jobHighestSocialTotal === ($scope.view.jobAgreeablenessArray).length) {
         $scope.view.jobOverallSocial = 'Agreeableness';
       }
-      console.log($scope.view.jobOverallSocial);
+
+      // ****** Figuring out top language tone for ideas *******
+      for(var t = 0; t < ($scope.view.ideasAllTopLanguagesArray).length; t++) {
+        if($scope.view.ideasAllTopLanguagesArray[t] === 'analytical') {
+          $scope.view.ideasAnalyticalArray.push($scope.view.ideasAllTopLanguagesArray[t]);
+        }
+        else if($scope.view.ideasAllTopLanguagesArray[t] === 'confident') {
+          $scope.view.ideasConfidentArray.push($scope.view.ideasAllTopLanguagesArray[t]);
+        }
+        else if($scope.view.ideasAllTopLanguagesArray[t] === 'tentative') {
+          $scope.view.ideasTentativeArray.push($scope.view.ideasAllTopLanguagesArray[t]);
+        }
+        else {
+          console.log("A different language");
+        }
+      }
+
+      $scope.view.ideasHighestLanguageTotal = Math.max(($scope.view.ideasAnalyticalArray).length, ($scope.view.ideasConfidentArray).length, ($scope.view.ideasTentativeArray).length);
+      if($scope.view.ideasHighestLanguageTotal === ($scope.view.ideasAnalyticalArray).length) {
+        $scope.view.ideasOverallLanguage = 'Analytical';
+      }
+      else if($scope.view.ideasHighestLanguageTotal === ($scope.view.ideasConfidentArray).length) {
+        $scope.view.ideasOverallLanguage = 'Confident';
+      }
+      else if($scope.view.ideasHighestLanguageTotal === ($scope.view.ideasTentativeArray).length) {
+        $scope.view.ideasOverallLanguage = 'Tentative';
+      }
+
+      // ******* Figuring out top Social tone for Ideas *******
+      for(var y = 0; y < ($scope.view.ideasAllTopSocialArray).length; y++) {
+        if($scope.view.ideasAllTopSocialArray[y] === 'openness') {
+          $scope.view.ideasOpennessArray.push($scope.view.ideasAllTopSocialArray[y]);
+        }
+        else if($scope.view.ideasAllTopSocialArray[y] === 'conscientiousness') {
+          $scope.view.ideasConscientionotebookrray.push($scope.view.ideasAllTopSocialArray[y]);
+        }
+        else if($scope.view.ideasAllTopSocialArray[y] === 'extraversion') {
+          $scope.view.ideasasExtraversionArray.push($scope.view.ideasAllTopSocialArray[y]);
+        }
+        else if($scope.view.ideasAllTopSocialArray[y] === 'agreeableness') {
+          $scope.view.ideasAgreeablenessArray.push($scope.view.ideasAllTopSocialArray[y]);
+        }
+        else {
+          console.log("Could be Emotional Range for Journal");
+        }
+      }
+
+      $scope.view.ideasHighestSocialTotal = Math.max(($scope.view.ideasOpennessArray).length, ($scope.view.ideasConscientiousnessArray).length, ($scope.view.ideasExtraversionArray).length, ($scope.view.ideasAgreeablenessArray).length);
+      if($scope.view.ideasHighestSocialTotal === ($scope.view.ideasOpennessArray).length) {
+        $scope.view.ideasOverallSocial = 'Openness';
+      }
+      else if($scope.view.ideasHighestSocialTotal === ($scope.view.ideasConscientiousnessArray).length) {
+        $scope.view.ideasOverallSocial = 'Conscientiousness';
+      }
+      else if($scope.view.ideasHighestSocialTotal === ($scope.view.ideasExtraversionArray).length) {
+        $scope.view.ideasOverallSocial = 'Extraversion';
+      }
+      else if($scope.view.ideasHighestSocialTotal === ($scope.view.ideasAgreeablenessArray).length) {
+        $scope.view.ideasOverallSocial = 'Agreeableness';
+      }
 
       // ***** Getting Personality Results for Journal Folder and making graphs ******
 
