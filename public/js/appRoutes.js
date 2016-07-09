@@ -24,11 +24,6 @@ angular.module('sampleApp').config(['$routeProvider', '$locationProvider', funct
           controller: 'LoginController'
         })
 
-        .when('/import', {
-          templateUrl: 'views/import.html',
-          controller: 'ImportController'
-        })
-
         .when('/explanation', {
           templateUrl: 'views/explanation.html',
           controller: 'NewEntryController'

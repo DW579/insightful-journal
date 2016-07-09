@@ -54,7 +54,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     explanationEntry: ''
   };
 
-
   $(document).ready(function() {
     $('select').material_select();
   });
