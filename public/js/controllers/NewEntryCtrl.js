@@ -247,6 +247,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         var chart = new google.visualization.BarChart(document.getElementById("barchart_language"));
         chart.draw(view, options);
       }
+
       function socialChart() {
         var data = google.visualization.arrayToDataTable([
           ["Social", "Score", { role: "style" } ],
@@ -321,10 +322,4 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       console.log(result);
     });
   };
-
-    // --------Use the personality anazlyze only for the overview of the persons notebook--------
-    // NewEntry.createPersonality(inputText).then(function(personalityResult) {
-    //   console.log(personalityResult.data);
-    // })
-
 }

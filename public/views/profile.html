@@ -67,16 +67,139 @@
     </div>
 
     <div class="col s5 center">
-      <h3>Overview of Folder</h3>
-      <div class="row">
-        <div class="col s12">
-          <h4>Personality of Folder</h4>
-          <div class="card-panel teal">
-            <h5 class="white-text center">Fearful</h5>
+      <div class="row" ng-hide="filterFolder !== 'journal'">
+        <h3>Overview of Journal Folder</h3>
+        <div class="row">
+          <table class="columns">
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="journalPersonalityChart" style="border: 1px solid #ccc"></div></td>
+              <td ng-style="{'width': '50%'}"><div id="journalNeedsChart" style="border: 1px solid #ccc"></div></td>
+            </tr>
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="journalValuesChart" style="border: 1px solid #ccc"></div></td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <table class="columns">
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="watsonChart" style="border: 1px solid #ccc"></div></td>
+              <td ng-style="{'width': '50%'}"><div id="userChart" style="border: 1px solid #ccc"></div></td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Journal Language Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{ view.journalOverallLanguage }}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Journal Social Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{ view.journalOverallSocial }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-hide="filterFolder !== 'notebook'">
+        <h3>Overview of Notebook Folder</h3>
+        <div class="row">
+          <table class="columns">
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="notebookPersonalityChart" style="border: 1px solid #ccc"></div></td>
+              <td ng-style="{'width': '50%'}"><div id="notebookNeedsChart" style="border: 1px solid #ccc"></div></td>
+            </tr>
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="notebookValuesChart" style="border: 1px solid #ccc"></div></td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Notebook Language Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{  }}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Notebook Social Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{  }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-hide="filterFolder !== 'job'">
+        <h3>Overview of Job Folder</h3>
+        <div class="row">
+          <table class="columns">
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="" style="border: 1px solid #ccc"></div></td>
+              <td ng-style="{'width': '50%'}"><div id="" style="border: 1px solid #ccc"></div></td>
+            </tr>
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="" style="border: 1px solid #ccc"></div></td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Job Language Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{  }}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Job Social Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{  }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-hide="filterFolder !== 'ideas'">
+        <h3>Overview of Ideas Folder</h3>
+        <div class="row">
+          <table class="columns">
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="" style="border: 1px solid #ccc"></div></td>
+              <td ng-style="{'width': '50%'}"><div id="" style="border: 1px solid #ccc"></div></td>
+            </tr>
+            <tr>
+              <td ng-style="{'width': '50%'}"><div id="" style="border: 1px solid #ccc"></div></td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Ideas Language Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{  }}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4>Ideas Social Tone</h4>
+            <div class="card-panel teal">
+              <h5 class="white-text center">{{  }}</h5>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 
 </div>
