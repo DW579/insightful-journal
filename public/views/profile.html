@@ -12,7 +12,7 @@
 
   <div class="row">
     <div class="col s4">
-      <div class="col s6" ng-repeat="data in view.dataArray | filter : filterFolder : data.folder">
+      <div class="col s6" ng-repeat="data in view.dataArray | filter : {'folder': filterFolder}">
         <div class="card">
           <div class="card-content">
             <span class="card-title" ng-style="{'font-size': 13, 'line-height': '50%'}"><strong>{{data.title_entry | limitTo : 35}}</strong></span>
@@ -20,12 +20,13 @@
           </div>
           <div class="card-action">
             <a ng-click="view.filterEntry = data.id">Open</a>
+            <span ng-show="view.filterEntry === data.id" ng-style="{'color': 'green'}">Selected</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col s3" ng-repeat="entry in view.dataArray | filter : {'id': view.filterEntry}">
+    <div class="col s3" ng-repeat="entry in view.dataArray | filter : {'id': view.filterEntry} : true">
       <anguvideo ng-model="entry.first_video_link" width="100%" height="200"></anguvideo>
       <div class="col s12">
         <h5>{{entry.first_video_title}}</h5>
