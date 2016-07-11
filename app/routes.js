@@ -3,32 +3,32 @@ var watson = require('watson-developer-cloud');
 var YouTube = require('youtube-node');
 const Promise = require('bluebird');
 var fs = require('fs');
-var dotenv = require('dotenv').config();
+require('dotenv').config();
 var knex = require('../db/knex');
 
 var tone_analyzer = watson.tone_analyzer({
-  username: dotenv.TONEANALYZERUSERNAME,
-  password: dotenv.TONEANALYZERPASSWORD,
+  username: process.env.TONEANALYZERUSERNAME,
+  password: process.env.TONEANALYZERPASSWORD,
   version: 'v3',
   version_date: '2016-05-19 '
 });
 
 var concept_insights = watson.concept_insights({
-  username: dotenv.CONCEPTINSIGHTUSERNAME,
-  password: dotenv.CONCEPTINSIGHTPASSWORD,
+  username: process.env.CONCEPTINSIGHTUSERNAME,
+  password: process.env.CONCEPTINSIGHTPASSWORD,
   version: 'v2'
 });
 
 var document_conversion = watson.document_conversion({
-  username: dotenv.DOCUMENTCONVERSIONUSERNAME,
-  password: dotenv.DOCUMENTCONVERSIONPASSWORD,
+  username: process.env.DOCUMENTCONVERSIONUSERNAME,
+  password: process.env.DOCUMENTCONVERSIONPASSWORD,
   version: 'v1',
   version_date: '2015-12-15'
 });
 
 var personality_insights = watson.personality_insights({
-  username: dotenv.PERSONALITYUSERNAME,
-  password: dotenv.PERSONALITYPASSWORD,
+  username: process.env.PERSONALITYUSERNAME,
+  password: process.env.PERSONALITYPASSWORD,
   version: 'v2'
 });
 
@@ -89,7 +89,7 @@ function topConceptData(id) {
 
 function youTubeContent(label) {
   var youTube = new YouTube();
-  youTube.setKey(dotenv.YOUTUBEKEY);
+  youTube.setKey(process.env.YOUTUBEKEY);
   youTube.addParam('channelId', 'UCAuUUnT6oDeKwE6v1NGQxug');
 
   return new Promise((resolve, reject) => {
