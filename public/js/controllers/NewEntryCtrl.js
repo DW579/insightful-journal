@@ -189,11 +189,11 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       $scope.view.topConceptLink = result.data.concepts.conceptData.link;
       $scope.view.topConceptAbstract = result.data.concepts.conceptData.abstract;
 
-      $scope.view.firstVideoId = "http://www.youtube.com/embed/" + result.data.concepts.content.items[0].id.videoId + "?rel=0";
+      $scope.view.firstVideoId = "https://www.youtube.com/embed/" + result.data.concepts.content.items[0].id.videoId + "?rel=0";
       $scope.view.firstVideoTitle = result.data.concepts.content.items[0].snippet.title;
       $scope.view.firstVideoDescription = result.data.concepts.content.items[0].snippet.description;
 
-      $scope.view.secondVideoId = "http://www.youtube.com/embed/" + result.data.concepts.content.items[1].id.videoId + "?rel=0";
+      $scope.view.secondVideoId = "https://www.youtube.com/embed/" + result.data.concepts.content.items[1].id.videoId + "?rel=0";
       $scope.view.secondVideoTitle = result.data.concepts.content.items[1].snippet.title;
       $scope.view.secondVideoDescription = result.data.concepts.content.items[1].snippet.description;
       if(($scope.view.language).length > 0) {
