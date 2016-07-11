@@ -63,11 +63,23 @@ function NewEntryController($scope, $http, $location, NewEntry) {
   };
 
   $scope.journalAnswer = function() {
-    $scope.view.switch = false;
+    if($scope.view.journal === 'yes') {
+      $(document).ready(function(){
+        $('#modal1').openModal({
+          dismissible: false,
+          opacity: .5,
+          in_duration: 400,
+          out_duration: 300
+        });
+      });
+    }
+    else {
+      $scope.view.switch = false;
+    }
   };
 
   $scope.submitUserEmotion = function() {
-    $scope.view.area = true;
+    $scope.view.switch = false;
   };
 
   $scope.fileUpload = function() {
@@ -109,8 +121,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         $scope.view.highestEmotionTitle = "sadness";
       }
 
-      console.log($scope.view.highestEmotionTitle);
-
       if($scope.view.highestEmotionTitle !== $scope.view.userEmotion) {
         $scope.view.direction = '/explanation';
       }
@@ -134,7 +144,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       } else {
         $scope.view.highestLanguageTitle = 'tentative';
       }
-      console.log($scope.view.highestLanguageTitle);
 
       $scope.view.social = result.data.tone.document_tone.tone_categories[2].category_name;
       $scope.view.openness = result.data.tone.document_tone.tone_categories[2].tones[0].tone_name;
@@ -169,7 +178,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       } else {
         $scope.view.highestSocialTitle = 'agreeableness';
       }
-      console.log($scope.view.highestSocialTitle);
 
       $scope.view.topConceptLabel = result.data.concepts.conceptData.label;
       $scope.view.topConceptLink = result.data.concepts.conceptData.link;

@@ -1,50 +1,51 @@
 <div class="container" ng-controller="NewEntryController">
   <div class="row" ng-show="view.switch">
     <h3>Will this be for your Journal?</h3>
-    <form ng-submit="journalAnswer()">
-      <p>
-        <input name="group1" type="radio" id="yes" value="yes" ng-model="view.journal" />
-        <label for="yes">Yes</label>
-      </p>
-      <p>
-        <input name="group1" type="radio" id="no" value="no" ng-model="view.journal" />
-        <label for="no">No</label>
-      </p>
-      <button class="btn waves-effect waves-light" type="submit" name="action" ng-style="{'background-color': '#C1AC8E'}">Submit</button>
-    </form>
-  </div>
+    <p>
+      <input name="group1" type="radio" id="yes" value="yes" ng-model="view.journal" />
+      <label for="yes">Yes</label>
+    </p>
+    <p>
+      <input name="group1" type="radio" id="no" value="no" ng-model="view.journal" />
+      <label for="no">No</label>
+    </p>
+    <a ng-click="journalAnswer()" class="modal-trigger waves-effect waves-light btn" ng-style="{'background-color': '#C1AC8E'}">Choose</a>
 
-  <div class="row" ng-hide="view.switch">
-    <div class="row">
-      <form class="col s5" ng-show="view.journal === 'yes'" ng-submit="submitUserEmotion()">
-        <div class="row">
-          <h5>How do you feel today?</h5>
-          <p>
-            <input class="with-gap" name="group2" type="radio" value="anger" id="anger" ng-model="view.userEmotion" />
-            <label for="anger">Angery</label>
-          </p>
-          <p>
-            <input class="with-gap" name="group2" type="radio" value="disgust" id="disgust" ng-model="view.userEmotion" />
-            <label for="disgust">Disgusted</label>
-          </p>
-          <p>
-            <input class="with-gap" name="group2" type="radio" value="fear" id="fear"  ng-model="view.userEmotion" />
-            <label for="fear">Fearful</label>
-          </p>
-          <p>
-            <input class="with-gap" name="group2" type="radio" value="joy" id="joy" ng-model="view.userEmotion" />
-            <label for="joy">Joyful</label>
-          </p>
-          <p>
-            <input class="with-gap" name="group2" type="radio" value="sadness" id="sadness" ng-model="view.userEmotion" />
-            <label for="sadness">Sad</label>
-          </p>
+    <div id="modal1" class="modal modal-fixed-footer">
+      <form ng-submit="submitUserEmotion()">
+        <div class="modal-content">
+          <div class="row">
+            <h5>How do you feel today?</h5>
+            <p>
+              <input class="with-gap" name="group2" type="radio" value="anger" id="anger" ng-model="view.userEmotion" />
+              <label for="anger">Angery</label>
+            </p>
+            <p>
+              <input class="with-gap" name="group2" type="radio" value="disgust" id="disgust" ng-model="view.userEmotion" />
+              <label for="disgust">Disgusted</label>
+            </p>
+            <p>
+              <input class="with-gap" name="group2" type="radio" value="fear" id="fear"  ng-model="view.userEmotion" />
+              <label for="fear">Fearful</label>
+            </p>
+            <p>
+              <input class="with-gap" name="group2" type="radio" value="joy" id="joy" ng-model="view.userEmotion" />
+              <label for="joy">Joyful</label>
+            </p>
+            <p>
+              <input class="with-gap" name="group2" type="radio" value="sadness" id="sadness" ng-model="view.userEmotion" />
+              <label for="sadness">Sad</label>
+            </p>
+          </div>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action" ng-style="{'background-color': '#C1AC8E'}">Submit Emotion</button>
+        <div class="modal-footer">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+        </div>
       </form>
     </div>
+  </div>
 
-    <div class="row" ng-show="view.area || view.journal === 'no'">
+    <div class="row" ng-hide="view.switch">
       <div class="row">
         <form ng-submit="fileUpload()" class="col s5 offset-s7">
           <div class="file-field input-field">
@@ -125,8 +126,7 @@
       </div>
     </div>
 
-    <div class="row" >
-      <!-- ng-show="(view.language).length > 0" -->
+    <div class="row" ng-show="(view.language).length > 0">
       <form ng-submit="submitData()">
         <div class="row">
           <table class="columns">
@@ -185,8 +185,7 @@
           </div>
         </div>
 
-        <!-- ng-show="view.highestEmotionTitle !== view.userEmotion && view.journal === 'yes'" -->
-        <div class="row" >
+        <div class="row" ng-show="view.highestEmotionTitle !== view.userEmotion && view.journal === 'yes'">
           <h3>Please further explain the difference</h3>
           <span>There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference.</span>
           <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>

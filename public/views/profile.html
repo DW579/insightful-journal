@@ -4,7 +4,7 @@
       <ul class="tabs z-depth-1">
         <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'journal'; drawJournal()">Journal</a></li>
         <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'notebook'; drawNotebook()">Notebook</a></li>
-        <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'job'; drawJob()">Job</a></li>
+        <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'job'; drawJob()">Business</a></li>
         <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'ideas'; drawIdeas()">Ideas</a></li>
       </ul>
     </div>
@@ -180,7 +180,7 @@
               <ul class="collapsible popout" data-collapsible="accordion">
                 <li>
                   <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.notebookOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
-                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                  <div class="collapsible-body"><p>Language tone describes perceived writing style using these categories: analytical style, reasoning style, and confidence. For each of these categories, the service outputs a score from 0 to 1 that indicates tendency toward being perceived as described in the table.</p></div>
                 </li>
               </ul>
             </div>
@@ -189,14 +189,14 @@
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.notebookOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-body"><p>Social tone measures the social tendencies in people's writing. Tone Analyzer responds with analysis on five different social tones: openness, conscientiousness, extraversion, agreeableness, and emotional range (or neuroticism). These five social tones are adopted fromÂ the Big-five personality model. For each of these categories, the service outputs a score from 0 to 1 that indicates tendency toward the listed behaviors.</p></div>
               </li>
             </ul>
           </div>
         </div>
 
         <div class="row" ng-hide="filterFolder !== 'job'">
-          <h3 class="center">Overview of Job Folder</h3>
+          <h3 class="center">Overview of Business Folder</h3>
           <div class="row">
             <table class="columns">
               <tr>
@@ -221,7 +221,7 @@
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.jobOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-body"><p>Language tone describes perceived writing style using these categories: analytical style, reasoning style, and confidence. For each of these categories, the service outputs a score from 0 to 1 that indicates tendency toward being perceived as described in the table.</p></div>
               </li>
             </ul>
           </div>
@@ -230,7 +230,7 @@
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.jobOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-body"><p>Social tone measures the social tendencies in people's writing. Tone Analyzer responds with analysis on five different social tones: openness, conscientiousness, extraversion, agreeableness, and emotional range (or neuroticism). These five social tones are adopted fromÂ the Big-five personality model. For each of these categories, the service outputs a score from 0 to 1 that indicates tendency toward the listed behaviors.</p></div>
               </li>
             </ul>
           </div>
@@ -262,7 +262,7 @@
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.ideasOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-body"><p>Language tone describes perceived writing style using these categories: analytical style, reasoning style, and confidence. For each of these categories, the service outputs a score from 0 to 1 that indicates tendency toward being perceived as described in the table.</p></div>
               </li>
             </ul>
           </div>
@@ -271,7 +271,7 @@
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.ideasOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-body"><p>Social tone measures the social tendencies in people's writing. Tone Analyzer responds with analysis on five different social tones: openness, conscientiousness, extraversion, agreeableness, and emotional range (or neuroticism). These five social tones are adopted fromÂ the Big-five personality model. For each of these categories, the service outputs a score from 0 to 1 that indicates tendency toward the listed behaviors.</p></div>
               </li>
             </ul>
           </div>
