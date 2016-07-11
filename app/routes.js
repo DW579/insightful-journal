@@ -136,8 +136,8 @@ function youTubeContent(label) {
           return initalConceptHighlights(text).then(initialConcept => {
             var arrayConcept = [];
             var maxAnnotations = initialConcept.annotations.length;
-            if (maxAnnotations > 10) {
-              maxAnnotations = 10;
+            if (maxAnnotations > 5) {
+              maxAnnotations = 5;
             }
             for(var i = 0; i < maxAnnotations; i++) {
               arrayConcept.push(initialConcept.annotations[i].concept.id);

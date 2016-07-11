@@ -11,6 +11,7 @@ function ProfileController($scope, $http, Profile) {
     notebookArray: [],
     jobArray: [],
     ideasArray: [],
+    overviewEntry: false,
 
     journalResults: [],
     journalAngerTotalWatson: [],
@@ -116,10 +117,116 @@ function ProfileController($scope, $http, Profile) {
     $('ul.tabs').tabs();
   });
 
+  $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false
+    });
+  });
+
   var journalData;
   var notebookData;
   var jobData;
   var ideasData;
+
+  $scope.reviewCharts = function() {
+    Profile.getData().then(function(result) {
+      var chartData = [];
+      for(var i = 0; i < (result.data).length; i++) {
+        if(result.data[i].id === $scope.view.filterEntry) {
+          chartData.push(result.data[i]);
+        }
+      }
+
+      google.charts.setOnLoadCallback(reviewEmotionChart);
+      google.charts.setOnLoadCallback(reviewLanguageChart);
+      google.charts.setOnLoadCallback(reviewSocialChart);
+
+      function reviewEmotionChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Emotion", "Score", { role: "style" } ],
+          ["Anger", chartData[0].anger_score, "#263749"],
+          ["Disgust", chartData[0].disgust_score, "#83969D"],
+          ["Fear", chartData[0].fear_score, "#A1BDA6"],
+          ["Joy", chartData[0].joy_score, "#DACBAE"],
+          ["Sadness", chartData[0].sadness_score, "#89212A"]
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+
+        var options = {
+          title: "Emotional Score of Text",
+          width: "100%",
+          height: 200,
+          bar: {groupWidth: "95%"},
+          legend: { position: "none" }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("review_emotion"));
+        chart.draw(view, options);
+      }
+
+      function reviewLanguageChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Language", "Score", { role: "style" } ],
+          ["Analytical", chartData[0].analytical_score, "#263749"],
+          ["Confident", chartData[0].confident_score, "#83969D"],
+          ["Tentative", chartData[0].tentative_score, "#A1BDA6"]
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+
+        var options = {
+          title: "Language Style Score of Text",
+          width: "50%",
+          height: 200,
+          bar: {groupWidth: "95%"},
+          legend: { position: "none" }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("review_language"));
+        chart.draw(view, options);
+      }
+
+      function reviewSocialChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Social", "Score", { role: "style" } ],
+          ["Openness", chartData[0].openness_score, "#263749"],
+          ["Conscientiousness", chartData[0].conscientiousness_score, "#83969D"],
+          ["Extraversion", chartData[0].extraversion_score, "#A1BDA6"],
+          ["Agreeableness", chartData[0].agreeableness_score, "#DACBAE"],
+          ["Emotional Range", chartData[0].emotional_range_score, "#89212A"]
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+
+        var options = {
+          title: "Social Style Score of Text",
+          width: "50%",
+          height: 200,
+          bar: {groupWidth: "95%"},
+          legend: { position: "none" }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("review_social"));
+        chart.draw(view, options);
+      }
+    });
+  };
 
   $scope.allData = function() {
     // ****** Getting all Data from Database ******
@@ -491,7 +598,6 @@ function ProfileController($scope, $http, Profile) {
       // ***** Getting Personality Results for Journal Folder and making graphs ******
 
       Profile.createJournal(journalData).then(function(result) {
-        console.log(result.data);
         $scope.view.journalResults = result.data;
 
         google.charts.setOnLoadCallback(watsonChart);
@@ -503,11 +609,11 @@ function ProfileController($scope, $http, Profile) {
         function journalPersonalityChart() {
           var data = google.visualization.arrayToDataTable([
             ["Personality", "Percent", { role: "style" } ],
-            ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#b87333"],
-            ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "silver"],
-            ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "gold"],
-            ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "color: #e5e4e2"],
-            ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "color: #e5e4e2"]
+            ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#263749"],
+            ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "#83969D"],
+            ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "#A1BDA6"],
+            ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "#DACBAE"],
+            ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "#89212A"]
           ]);
 
           var view = new google.visualization.DataView(data);
@@ -532,11 +638,11 @@ function ProfileController($scope, $http, Profile) {
         function journalNeedsChart() {
           var data = google.visualization.arrayToDataTable([
             ["Needs", "Percent", { role: "style" } ],
-            ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#b87333"],
-            ["Love", result.data.tree.children[1].children[0].children[7].percentage, "silver"],
-            ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "gold"],
-            ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "color: #e5e4e2"],
-            ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "color: #e5e4e2"]
+            ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#263749"],
+            ["Love", result.data.tree.children[1].children[0].children[7].percentage, "#83969D"],
+            ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "#A1BDA6"],
+            ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "#DACBAE"],
+            ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "#89212A"]
           ]);
 
           var view = new google.visualization.DataView(data);
@@ -561,11 +667,11 @@ function ProfileController($scope, $http, Profile) {
         function journalValuesChart() {
           var data = google.visualization.arrayToDataTable([
             ["Values", "Percentage", { role: "style" } ],
-            ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#b87333"],
-            ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "silver"],
-            ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "gold"],
-            ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "color: #e5e4e2"],
-            ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "color: #e5e4e2"]
+            ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#263749"],
+            ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "#83969D"],
+            ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "#A1BDA6"],
+            ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "#DACBAE"],
+            ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "#89212A"]
           ]);
 
           var view = new google.visualization.DataView(data);
@@ -631,7 +737,6 @@ function ProfileController($scope, $http, Profile) {
   // ***** Draw the Journal Charts again *****
   $scope.drawJournal = function() {
     Profile.createJournal(journalData).then(function(result) {
-      console.log(result.data);
       $scope.view.journalResults = result.data;
 
       google.charts.setOnLoadCallback(watsonChart);
@@ -643,11 +748,11 @@ function ProfileController($scope, $http, Profile) {
       function journalPersonalityChart() {
         var data = google.visualization.arrayToDataTable([
           ["Personality", "Percent", { role: "style" } ],
-          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#b87333"],
-          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "silver"],
-          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "gold"],
-          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "color: #e5e4e2"],
-          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#263749"],
+          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "#83969D"],
+          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "#A1BDA6"],
+          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "#DACBAE"],
+          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -672,11 +777,11 @@ function ProfileController($scope, $http, Profile) {
       function journalNeedsChart() {
         var data = google.visualization.arrayToDataTable([
           ["Needs", "Percent", { role: "style" } ],
-          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#b87333"],
-          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "silver"],
-          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "gold"],
-          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "color: #e5e4e2"],
-          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#263749"],
+          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "#83969D"],
+          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "#A1BDA6"],
+          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "#DACBAE"],
+          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -701,11 +806,11 @@ function ProfileController($scope, $http, Profile) {
       function journalValuesChart() {
         var data = google.visualization.arrayToDataTable([
           ["Values", "Percentage", { role: "style" } ],
-          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#b87333"],
-          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "silver"],
-          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "gold"],
-          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "color: #e5e4e2"],
-          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "color: #e5e4e2"]
+          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#263749"],
+          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "#83969D"],
+          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "#A1BDA6"],
+          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "#DACBAE"],
+          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -770,7 +875,6 @@ function ProfileController($scope, $http, Profile) {
   // ***** Draw the Notebook Charts on click event *****
   $scope.drawNotebook = function() {
     Profile.personalityNotebook(notebookData).then(function(result) {
-      console.log(result.data);
       $scope.view.notebookResults = result.data;
 
       google.charts.setOnLoadCallback(notebookPersonalityChart);
@@ -781,11 +885,11 @@ function ProfileController($scope, $http, Profile) {
       function notebookPersonalityChart() {
         var data = google.visualization.arrayToDataTable([
           ["Personality", "Percent", { role: "style" } ],
-          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#b87333"],
-          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "silver"],
-          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "gold"],
-          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "color: #e5e4e2"],
-          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#263749"],
+          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "#83969D"],
+          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "#A1BDA6"],
+          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "#DACBAE"],
+          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -810,11 +914,11 @@ function ProfileController($scope, $http, Profile) {
       function notebookNeedsChart() {
         var data = google.visualization.arrayToDataTable([
           ["Needs", "Percent", { role: "style" } ],
-          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#b87333"],
-          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "silver"],
-          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "gold"],
-          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "color: #e5e4e2"],
-          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#263749"],
+          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "#83969D"],
+          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "#A1BDA6"],
+          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "#DACBAE"],
+          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -839,11 +943,11 @@ function ProfileController($scope, $http, Profile) {
       function notebookValuesChart() {
         var data = google.visualization.arrayToDataTable([
           ["Values", "Percentage", { role: "style" } ],
-          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#b87333"],
-          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "silver"],
-          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "gold"],
-          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "color: #e5e4e2"],
-          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "color: #e5e4e2"]
+          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#263749"],
+          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "#83969D"],
+          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "A1BDA6"],
+          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "#DACBAE"],
+          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -900,11 +1004,11 @@ function ProfileController($scope, $http, Profile) {
       function jobPersonalityChart() {
         var data = google.visualization.arrayToDataTable([
           ["Personality", "Percent", { role: "style" } ],
-          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#b87333"],
-          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "silver"],
-          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "gold"],
-          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "color: #e5e4e2"],
-          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#263749"],
+          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "#83969D"],
+          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "#A1BDA6"],
+          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "#DACBAE"],
+          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -929,11 +1033,11 @@ function ProfileController($scope, $http, Profile) {
       function jobNeedsChart() {
         var data = google.visualization.arrayToDataTable([
           ["Needs", "Percent", { role: "style" } ],
-          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#b87333"],
-          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "silver"],
-          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "gold"],
-          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "color: #e5e4e2"],
-          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#263749"],
+          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "#83969D"],
+          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "#A1BDA6"],
+          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "#DACBAE"],
+          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -958,11 +1062,11 @@ function ProfileController($scope, $http, Profile) {
       function jobValuesChart() {
         var data = google.visualization.arrayToDataTable([
           ["Values", "Percentage", { role: "style" } ],
-          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#b87333"],
-          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "silver"],
-          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "gold"],
-          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "color: #e5e4e2"],
-          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "color: #e5e4e2"]
+          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#263749"],
+          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "#83969D"],
+          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "#A1BDA6"],
+          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "#DACBAE"],
+          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -1018,11 +1122,11 @@ function ProfileController($scope, $http, Profile) {
       function ideasPersonalityChart() {
         var data = google.visualization.arrayToDataTable([
           ["Personality", "Percent", { role: "style" } ],
-          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#b87333"],
-          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "silver"],
-          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "gold"],
-          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "color: #e5e4e2"],
-          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Agreeableness", result.data.tree.children[0].children[0].children[3].percentage, "#263749"],
+          ["Introversion/Extraversion", result.data.tree.children[0].children[0].children[2].percentage, "#83969D"],
+          ["Emotional range", result.data.tree.children[0].children[0].children[4].percentage, "#A1BDA6"],
+          ["Openness", result.data.tree.children[0].children[0].children[0].percentage, "#DACBAE"],
+          ["Conscientiousness", result.data.tree.children[0].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -1047,11 +1151,11 @@ function ProfileController($scope, $http, Profile) {
       function ideasNeedsChart() {
         var data = google.visualization.arrayToDataTable([
           ["Needs", "Percent", { role: "style" } ],
-          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#b87333"],
-          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "silver"],
-          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "gold"],
-          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "color: #e5e4e2"],
-          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "color: #e5e4e2"]
+          ["Practicality", result.data.tree.children[1].children[0].children[8].percentage, "#263749"],
+          ["Love", result.data.tree.children[1].children[0].children[7].percentage, "#83969D"],
+          ["Harmony", result.data.tree.children[1].children[0].children[4].percentage, "#A1BDA6"],
+          ["Liberty", result.data.tree.children[1].children[0].children[6].percentage, "#DACBAE"],
+          ["Closeness", result.data.tree.children[1].children[0].children[1].percentage, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -1076,11 +1180,11 @@ function ProfileController($scope, $http, Profile) {
       function ideasValuesChart() {
         var data = google.visualization.arrayToDataTable([
           ["Values", "Percentage", { role: "style" } ],
-          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#b87333"],
-          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "silver"],
-          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "gold"],
-          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "color: #e5e4e2"],
-          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "color: #e5e4e2"]
+          ["Conservation", result.data.tree.children[2].children[0].children[0].percentage, "#263749"],
+          ["Openness to change", result.data.tree.children[2].children[0].children[1].percentage, "#83969D"],
+          ["Hedonism", result.data.tree.children[2].children[0].children[2].percentage, "#A1BDA6"],
+          ["Self-enhancement", result.data.tree.children[2].children[0].children[3].percentage, "color: #DACBAE"],
+          ["Self-transcendence", result.data.tree.children[2].children[0].children[4].percentage, "color: #89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);

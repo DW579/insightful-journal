@@ -186,7 +186,6 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         $scope.view.loader = false;
       }
 
-      google.charts.load("current", {"packages":["corechart"]});
       google.charts.setOnLoadCallback(emotionChart);
       google.charts.setOnLoadCallback(languageChart);
       google.charts.setOnLoadCallback(socialChart);
@@ -194,11 +193,11 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       function emotionChart() {
         var data = google.visualization.arrayToDataTable([
           ["Emotion", "Score", { role: "style" } ],
-          ["Anger", $scope.view.angerScore, "#b87333"],
-          ["Disgust", $scope.view.disgustScore, "silver"],
-          ["Fear", $scope.view.fearScore, "silver"],
-          ["Joy", $scope.view.joyScore, "gold"],
-          ["Sadness", $scope.view.sadnessScore, "color: #e5e4e2"]
+          ["Anger", $scope.view.angerScore, "#263749"],
+          ["Disgust", $scope.view.disgustScore, "#83969D"],
+          ["Fear", $scope.view.fearScore, "#A1BDA6"],
+          ["Joy", $scope.view.joyScore, "#DACBAE"],
+          ["Sadness", $scope.view.sadnessScore, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -211,8 +210,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
 
         var options = {
           title: "Emotional Score of Text",
-          width: 600,
-          height: 400,
+          width: "100%",
+          height: 200,
           bar: {groupWidth: "95%"},
           legend: { position: "none" }
         };
@@ -223,9 +222,9 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       function languageChart() {
         var data = google.visualization.arrayToDataTable([
           ["Language", "Score", { role: "style" } ],
-          ["Analytical", $scope.view.analyticalScore, "#b87333"],
-          ["Confident", $scope.view.confidentScore, "silver"],
-          ["Tentative", $scope.view.tentativeScore, "gold"]
+          ["Analytical", $scope.view.analyticalScore, "#263749"],
+          ["Confident", $scope.view.confidentScore, "#83969D"],
+          ["Tentative", $scope.view.tentativeScore, "#A1BDA6"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -238,8 +237,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
 
         var options = {
           title: "Language Style Score of Text",
-          width: 600,
-          height: 400,
+          width: "50%",
+          height: 200,
           bar: {groupWidth: "95%"},
           legend: { position: "none" }
         };
@@ -250,11 +249,11 @@ function NewEntryController($scope, $http, $location, NewEntry) {
       function socialChart() {
         var data = google.visualization.arrayToDataTable([
           ["Social", "Score", { role: "style" } ],
-          ["Openness", $scope.view.opennessScore, "#b87333"],
-          ["Conscientiousness", $scope.view.conscientiousnessScore, "silver"],
-          ["Extraversion", $scope.view.extraversionScore, "gold"],
-          ["Agreeableness", $scope.view.agreeablenessScore, "gold"],
-          ["Emotional Range", $scope.view.emotionalRangeScore, "gold"]
+          ["Openness", $scope.view.opennessScore, "#263749"],
+          ["Conscientiousness", $scope.view.conscientiousnessScore, "#83969D"],
+          ["Extraversion", $scope.view.extraversionScore, "#A1BDA6"],
+          ["Agreeableness", $scope.view.agreeablenessScore, "#DACBAE"],
+          ["Emotional Range", $scope.view.emotionalRangeScore, "#89212A"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -267,8 +266,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
 
         var options = {
           title: "Social Style Score of Text",
-          width: 600,
-          height: 400,
+          width: "50%",
+          height: 200,
           bar: {groupWidth: "95%"},
           legend: { position: "none" }
         };
