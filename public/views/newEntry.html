@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+          <button class="modal-action modal-close waves-effect waves-green btn-flat">Choose</button>
         </div>
       </form>
     </div>
@@ -129,6 +129,21 @@
     <div class="row" ng-show="(view.language).length > 0">
       <form ng-submit="submitData()">
         <div class="row">
+          <h5>Data Analysis</h5>
+          <ul class="collapsible popout" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">info_outline</i>Definitions of Tones</div>
+              <div class="collapsible-body">
+                <p>Low Value- Less than 0.5 - less likely to be perceived as joyful.</p>
+                <p>High Value- More than 0.75 - Highly likely to be perceived as joyful.</p>
+                <p>Joy- Joy or happiness has shades of enjoyment, satisfaction and pleasure. There is a sense of well-being, inner peace, love, safety and contentment.</p>
+                <p>Fear- A response to impending danger. It is a survival mechanism that is a reaction to some negative stimulus. It may be a mild caution or an extreme phobia.</p>
+                <p>Sadness- Indicates a feeling of loss and disadvantage. When a person can be observed to be quiet, less energetic and withdrawn, it may be inferred that sadness exists.</p>
+                <p>Disgust- An emotional response of revulsion to something considered offensive or unpleasant. It is a sensation that refers to something revolting.</p>
+                <p>Anger- Evoked due to injustice, conflict, humiliation, negligence or betrayal. If anger is active, the individual attacks the target, verbally or physically. If anger is passive, the person silently sulks and feels tension and hostility.</p>
+              </div>
+            </li>
+          </ul>
           <table class="columns">
             <tr>
               <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="barchart_emotion" style="border: 1px solid #ccc, width: 100%"></div></td>
@@ -138,6 +153,19 @@
               <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="barchart_social" style="border: 1px solid #ccc, width: 100%"></div></td>
             </tr>
           </table>
+        </div>
+
+        <div class="row" ng-show="view.highestEmotionTitle !== view.userEmotion && view.journal === 'yes'">
+          <h3>Please further explain the difference</h3>
+          <span>There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference.</span>
+          <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea ng-model='view.explanationEntry' id="textareaExplanation" class="materialize-textarea"></textarea>
+              <label for="textareaExplanation">Enter your explanation below</label>
+            </div>
+          </div>
         </div>
 
         <div class="row">
@@ -185,19 +213,6 @@
           </div>
         </div>
 
-        <div class="row" ng-show="view.highestEmotionTitle !== view.userEmotion && view.journal === 'yes'">
-          <h3>Please further explain the difference</h3>
-          <span>There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference.</span>
-          <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <textarea ng-model='view.explanationEntry' id="textareaExplanation" class="materialize-textarea"></textarea>
-              <label for="textareaExplanation">Enter your explanation below</label>
-            </div>
-          </div>
-        </div>
-
         <div class="row">
           <h5>Select Folder to Save Entry</h5>
           <p>
@@ -210,7 +225,7 @@
           </p> -->
           <p>
             <input name="group3" type="radio" id="job" value="job" ng-model="view.folder"  />
-            <label for="job">Job</label>
+            <label for="job">Bussiness</label>
           </p>
           <p>
             <input name="group3" type="radio" id="ideas" value="ideas" ng-model="view.folder" />

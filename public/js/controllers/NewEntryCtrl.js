@@ -54,6 +54,12 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     explanationEntry: ''
   };
 
+  $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+
   $(document).ready(function() {
     $('select').material_select();
   });
@@ -218,7 +224,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
 
         var options = {
           title: "Emotional Score of Text",
-          width: "100%",
+          width: "50%",
           height: 200,
           bar: {groupWidth: "95%"},
           legend: { position: "none" }

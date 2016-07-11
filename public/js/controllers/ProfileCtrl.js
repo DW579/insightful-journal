@@ -161,7 +161,7 @@ function ProfileController($scope, $http, Profile) {
 
         var options = {
           title: "Emotional Score of Text",
-          width: "100%",
+          width: "50%",
           height: 200,
           bar: {groupWidth: "95%"},
           legend: { position: "none" }
@@ -626,7 +626,7 @@ function ProfileController($scope, $http, Profile) {
 
           var options = {
             title: "Personality of Journal",
-            width: "100%",
+            width: "50%",
             height: 200,
             bar: {groupWidth: "50%"},
             legend: { position: "none" }
@@ -765,7 +765,7 @@ function ProfileController($scope, $http, Profile) {
 
         var options = {
           title: "Personality of Journal",
-          width: "100%",
+          width: "50%",
           height: 200,
           bar: {groupWidth: "50%"},
           legend: { position: "none" }
@@ -902,7 +902,7 @@ function ProfileController($scope, $http, Profile) {
 
         var options = {
           title: "Personality of Notebook",
-          width: "100%",
+          width: "50%",
           height: 200,
           bar: {groupWidth: "50%"},
           legend: { position: "none" }
@@ -1021,7 +1021,7 @@ function ProfileController($scope, $http, Profile) {
 
         var options = {
           title: "Personality of Job",
-          width: "100%",
+          width: "50%",
           height: 200,
           bar: {groupWidth: "50%"},
           legend: { position: "none" }
@@ -1139,7 +1139,7 @@ function ProfileController($scope, $http, Profile) {
 
         var options = {
           title: "Personality of Ideas",
-          width: "100%",
+          width: "50%",
           height: 200,
           bar: {groupWidth: "50%"},
           legend: { position: "none" }

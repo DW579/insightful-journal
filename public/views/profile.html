@@ -116,6 +116,7 @@
         <div class="row" ng-hide="filterFolder !== 'journal'">
           <h3 class="center">Overview of Journal Folder</h3>
           <div class="row">
+            <h5>Personality Analysis</h5>
             <table class="columns">
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="journalPersonalityChart" style="border: 1px solid #ccc"></div></td>
@@ -127,6 +128,7 @@
             </table>
           </div>
           <div class="row">
+            <h5>Comparison of Emotional Tones</h5>
             <table class="columns">
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="watsonChart" style="border: 1px solid #ccc"></div></td>
@@ -135,7 +137,7 @@
             </table>
           </div>
           <div class="row">
-            <h4>Journal Language Tone</h4>
+            <h5>Journal Language Tone</h5>
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.journalOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -144,7 +146,7 @@
             </ul>
           </div>
           <div class="row">
-          <h4>Journal Social Tone</h4>
+          <h5>Journal Social Tone</h5>
           <ul class="collapsible popout" data-collapsible="accordion">
             <li>
               <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.journalOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -157,6 +159,7 @@
         <div class="row" ng-hide="filterFolder !== 'notebook'">
           <h3 class="center">Overview of Notebook Folder</h3>
           <div class="row">
+            <h5>Personality Analysis</h5>
             <table class="columns">
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="notebookPersonalityChart" style="border: 1px solid #ccc"></div></td>
@@ -168,6 +171,7 @@
             </table>
           </div>
           <div class="row">
+            <h5>Emotional Analysis</h5>
             <table class="columns">
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="notebookEmotionChart" style="border: 1px solid #ccc"></div></td>
@@ -176,7 +180,7 @@
           </div>
 
             <div class="row">
-              <h4>Notebook Language Tone</h4>
+              <h5>Notebook Language Tone</h5>
               <ul class="collapsible popout" data-collapsible="accordion">
                 <li>
                   <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.notebookOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -185,7 +189,7 @@
               </ul>
             </div>
             <div class="row">
-            <h4>Notebook Social Tone</h4>
+            <h5>Notebook Social Tone</h5>
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.notebookOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -198,6 +202,7 @@
         <div class="row" ng-hide="filterFolder !== 'job'">
           <h3 class="center">Overview of Business Folder</h3>
           <div class="row">
+            <h5>Personality Analysis</h5>
             <table class="columns">
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="jobPersonalityChart" style="border: 1px solid #ccc"></div></td>
@@ -210,6 +215,7 @@
           </div>
           <div class="row">
             <table class="columns">
+              <h5>Emotional Analysis</h5>
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="jobEmotionChart" style="border: 1px solid #ccc"></div></td>
               </tr>
@@ -217,7 +223,7 @@
           </div>
 
           <div class="row">
-            <h4>Job Language Tone</h4>
+            <h5>Job Language Tone</h5>
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.jobOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -226,7 +232,7 @@
             </ul>
           </div>
           <div class="row">
-            <h4>Job Social Tone</h4>
+            <h5>Job Social Tone</h5>
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.jobOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -239,6 +245,7 @@
         <div class="row" ng-hide="filterFolder !== 'ideas'">
           <h3 class="center">Overview of Ideas Folder</h3>
           <div class="row">
+            <h5>Personality Analysis</h5>
             <table class="columns">
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="ideasPersonalityChart" style="border: 1px solid #ccc"></div></td>
@@ -251,6 +258,7 @@
           </div>
           <div class="row">
             <table class="columns">
+              <h5>Emotional Analysis</h5>
               <tr>
                 <td ng-style="{'width': '50%'}"><div class="z-depth-2" id="ideasEmotionChart" style="border: 1px solid #ccc"></div></td>
               </tr>
@@ -258,7 +266,7 @@
           </div>
 
           <div class="row">
-            <h4>Ideas Language Tone</h4>
+            <h5>Ideas Language Tone</h5>
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.ideasOverallLanguage }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
@@ -267,7 +275,7 @@
             </ul>
           </div>
           <div class="row">
-            <h4>Ideas Social Tone</h4>
+            <h5>Ideas Social Tone</h5>
             <ul class="collapsible popout" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header" ng-style="{'font-size': '18px', 'color': '#FFD8A6', 'background-color': '#546E7A', 'font-weight': 'bold'}">{{ view.ideasOverallSocial }} <span ng-style="{'color': 'white', 'font-weight': 'normal'}">(Click to learn more)</span></div>
