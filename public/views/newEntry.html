@@ -2,11 +2,11 @@
   <div class="row" ng-show="view.switch">
     <h3>Will this be for your Journal?</h3>
     <p>
-      <input name="group1" type="radio" id="yes" value="yes" ng-model="view.journal" />
+      <input name="group1" type="radio" id="yes" value="yes" ng-model="view.journal" class="validate" />
       <label for="yes">Yes</label>
     </p>
     <p>
-      <input name="group1" type="radio" id="no" value="no" ng-model="view.journal" />
+      <input name="group1" type="radio" id="no" value="no" ng-model="view.journal" class="validate" />
       <label for="no">No</label>
     </p>
     <a ng-click="journalAnswer()" class="modal-trigger waves-effect waves-light btn" ng-style="{'background-color': '#C1AC8E'}">Choose</a>
@@ -17,23 +17,23 @@
           <div class="row">
             <h5>How do you feel today?</h5>
             <p>
-              <input class="with-gap" name="group2" type="radio" value="anger" id="anger" ng-model="view.userEmotion" />
-              <label for="anger">Angery</label>
+              <input class="with-gap validate" name="group2" type="radio" value="anger" id="anger" ng-model="view.userEmotion" />
+              <label for="anger">Angry</label>
             </p>
             <p>
-              <input class="with-gap" name="group2" type="radio" value="disgust" id="disgust" ng-model="view.userEmotion" />
+              <input class="with-gap validate" name="group2" type="radio" value="disgust" id="disgust" ng-model="view.userEmotion" />
               <label for="disgust">Disgusted</label>
             </p>
             <p>
-              <input class="with-gap" name="group2" type="radio" value="fear" id="fear"  ng-model="view.userEmotion" />
+              <input class="with-gap validate" name="group2" type="radio" value="fear" id="fear"  ng-model="view.userEmotion" />
               <label for="fear">Fearful</label>
             </p>
             <p>
-              <input class="with-gap" name="group2" type="radio" value="joy" id="joy" ng-model="view.userEmotion" />
+              <input class="with-gap validate" name="group2" type="radio" value="joy" id="joy" ng-model="view.userEmotion" />
               <label for="joy">Joyful</label>
             </p>
             <p>
-              <input class="with-gap" name="group2" type="radio" value="sadness" id="sadness" ng-model="view.userEmotion" />
+              <input class="with-gap validate" name="group2" type="radio" value="sadness" id="sadness" ng-model="view.userEmotion" />
               <label for="sadness">Sad</label>
             </p>
           </div>
