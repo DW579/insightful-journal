@@ -1,0 +1,147 @@
+<div class="container" ng-controller="NewEntryController">
+  <h1>About</h1>
+  <div class="row">
+    <div class="col s12">
+      <div class="card-panel" ng-style="{'background-color': '#F1E0C3'}">
+        <span class="black-text" ng-style="{'font-size': '17px'}">Insightful Journal is a journaling application with analytics. A user can perform an in-depth analysis of their journal entries to better understand how their writing comes across. The app provides feedback on the personality of the entries, as well as the language, social and emotional tones. To help the user dive deeper into their topic, the app provides Wikipedia definitions and related TED Talks. This application is to help spree ideas and provide a greater understanding of the user's tone of writing.</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h4>Below is provided further details to explain the data</h4>
+  </div>
+  <div class="row">
+    <h5>Emotional Tone</h5>
+    <p>Emotional tone is inferred from different types of emotions and feelings that people express in their language.</p>
+    <ul class="collapsible popout" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">Joy</div>
+        <div class="collapsible-body">
+          <p>Joy or happiness has shades of enjoyment, satisfaction and pleasure. There is a sense of well-being, inner peace, love, safety and contentment.</p>
+          <p>Less than 0.5 - less likely to be perceived as joyful.</p>
+          <p>More than 0.75 - Highly likely to be perceived as joyful.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Fear</div>
+        <div class="collapsible-body">
+          <p>A response to impending danger. It is a survival mechanism that is a reaction to some negative stimulus. It may be a mild caution or an extreme phobia.</p>
+          <p>Less than 0.5 - less likely to be perceived as scared.</p>
+          <p>More than 0.75 - Highly likely to be perceived as scared.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Sadness</div>
+        <div class="collapsible-body">
+          <p>Indicates a feeling of loss and disadvantage. When a person can be observed to be quiet, less energetic and withdrawn, it may be inferred that sadness exists.</p>
+          <p>Less than 0.5 - less likely to be perceived as sad.</p>
+          <p>More than 0.75 - Highly likely to be perceived as sad.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Disgust</div>
+        <div class="collapsible-body">
+          <p>An emotional response of revulsion to something considered offensive or unpleasant. It is a sensation that refers to something revolting.</p>
+          <p>Less than 0.5 - less likely to be perceived as disgusted.</p>
+          <p>More than 0.75 - Highly likely to be perceived as disgusted.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Anger</div>
+        <div class="collapsible-body">
+          <p>Evoked due to injustice, conflict, humiliation, negligence or betrayal. If anger is active, the individual attacks the target, verbally or physically. If anger is passive, the person silently sulks and feels tension and hostility.</p>
+          <p>Less than 0.5 - less likely to be perceived as angry.</p>
+          <p>More than 0.75 - Highly likely to be perceived as angry.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <h5>Social Tone</h5>
+    <p>Social tone measures the social tendencies in people's writing. The five social tones are adopted from the Big-five personality model.</p>
+    <ul class="collapsible popout" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">Openness</div>
+        <div class="collapsible-body">
+          <p>The extent a person is open to experience a variety of activities.</p>
+          <p>Less than 0.25 - more likely to be perceived as no-nonsense, straightforward, blunt, or preferring tradition and the obvious over the complex, ambiguous, and subtle.</p>
+          <p>More than 0.75 - more likely to be perceived as intellectual, curious, emotionally-aware, imaginative, willing to try new things, appreciating beauty, or open to change.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Conscientiousness</div>
+        <div class="collapsible-body">
+          <p>The tendency to act in an organized or thoughtful way.</p>
+          <p>Less than 0.25 - more likely to be perceived as spontaneous, laid-back, reckless, unmethodical, remiss, or disorganized.</p>
+          <p>More than 0.75 - more likely to be perceived as disciplined, dutiful, achievement-striving, confident, driven, or organized.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Extraversion</div>
+        <div class="collapsible-body">
+          <p>The tendency to seek stimulation in the company of others.</p>
+          <p>Less than 0.25 - more likely to be perceived as independent, timid, introverted, restrained, boring, or dreary.</p>
+          <p>More than 0.75 - more likely to be perceived as engaging, seeking attention, needy, assertive, outgoing, sociable, cheerful, excitement-seeking, or busy.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Agreeableness</div>
+        <div class="collapsible-body">
+          <p>The tendency to be compassionate and cooperative towards others.</p>
+          <p>Less than 0.25 - more likely to be perceived as selfish, uncaring, uncooperative, self-interested, confrontational, skeptical, or arrogant.</p>
+          <p>More than 0.75 - more likely to be perceived as caring, sympathetic, cooperative, compromising, trustworthy, or humble.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Emotional Range</div>
+        <div class="collapsible-body">
+          <p>The extent a person's emotion is sensitive to the environment.</p>
+          <p>Less than 0.25 - more likely to be perceived as calm, bland, content, relaxed, unconcerned, or careful.</p>
+          <p>More than 0.75 - more likely to be perceived as concerned, frustrated, angry, passionate, upset, stressed, insecure, or impulsive.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <h5>Language Tone</h5>
+    <p>Describes perceived writing style using these categories: analytical style, reasoning style, and confidence.</p>
+    <ul class="collapsible popout" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">Analytic</div>
+        <div class="collapsible-body">
+          <p>A person's reasoning and analytical attitude about things.</p>
+          <p>Less than 0.25 - the text contains little or no evidence of analytical tone.</p>
+          <p>More than 0.75 - more likely to be perceived as intellectual, rational, systematic, emotionless, or impersonal.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Confidence</div>
+        <div class="collapsible-body">
+          <p>A persons degree of certainty.</p>
+          <p>Less than 0.25 - the text contains little or no evidence of confidence in tone.</p>
+          <p>More than 0.75 - more likely to be perceived as assured, collected, hopeful, or egotistical.</p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Tentative</div>
+        <div class="collapsible-body">
+          <p>A persons degree of inhibition.</p>
+          <p>Less than 0.25 - the text contains little or no evidence of tentativeness in tone.</p>
+          <p>More than 0.75 - more likely to be perceived as questionable, doubtful, limited, or debatable.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <h5>Personality Insights</h5>
+    <div class="col s12">
+      <div class="card-panel grey">
+        <p class="white-text">The Personality Insights service is based on the psychology of language in combination with data analytics algorithms.</p>
+        <p class="white-text">Needs describe which aspects of a product will resonate with a person.</p>
+        <p class="white-text">Values describe motivating factors that influence a person's decision making.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
