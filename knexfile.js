@@ -1,11 +1,11 @@
 module.exports = {
-  development: {
-    client: 'pg',
-    connection: 'postgres://localhost/capstone-database'
-  },
+    development: {
+        client: 'pg',
+        connection: 'postgres://localhost/capstone-database'
+    },
 
-  production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL
-  }
+    production: {
+        client: 'pg',
+        connection: process.env.DATABASE_URL
+    }
 };
