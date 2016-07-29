@@ -97,6 +97,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     $scope.toneAnalyze = function() {
         var inputText = $scope.view.text;
         NewEntry.createWatson(inputText).then(function(result) {
+          console.log(result);
                 $scope.view.angerScore = result.data.tone.document_tone.tone_categories[0].tones[0].score;
                 $scope.view.angerScore /= Math.pow(100, -1);
                 $scope.view.angerScore = Math.round($scope.view.angerScore);
@@ -180,9 +181,8 @@ function NewEntryController($scope, $http, $location, NewEntry) {
                     $scope.view.highestSocialTitle = 'agreeableness';
                 }
 
-                $scope.view.topConceptLabel = result.data.concepts.conceptData.label;
-                $scope.view.topConceptLink = result.data.concepts.conceptData.link;
-                $scope.view.topConceptAbstract = result.data.concepts.conceptData.abstract;
+                $scope.view.topConceptLabel = result.data.concepts.concepts[0].text;
+                $scope.view.topConceptLink = result.data.concepts.concepts[0].dbpedia;
 
                 $scope.view.firstVideoId = "https://www.youtube.com/embed/" + result.data.concepts.content.items[0].id.videoId + "?rel=0";
                 $scope.view.firstVideoTitle = result.data.concepts.content.items[0].snippet.title;

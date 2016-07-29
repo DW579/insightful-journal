@@ -19,6 +19,10 @@ var concept_insights = watson.concept_insights({
     version: 'v2'
 });
 
+var alchemy_language = watson.alchemy_language({
+    api_key: process.env.ALCHEMYLANGUAGEAPI
+});
+
 var document_conversion = watson.document_conversion({
     username: process.env.DOCUMENTCONVERSIONUSERNAME,
     password: process.env.DOCUMENTCONVERSIONPASSWORD,
@@ -96,6 +100,26 @@ function topConceptData(id) {
     });
 }
 
+function testConcept(text) {
+  return new Promise((resolve, reject) => {
+    var parameters = {
+        text: text,
+        knowledgeGraph: 1
+    };
+
+    alchemy_language.concepts(parameters, function(err, concept) {
+        if (err) {
+          console.log('error:', err);
+          reject(err);
+        }
+        else {
+          console.log(JSON.stringify(concept, null, 2));
+          resolve(concept);
+        }
+    });
+  });
+}
+
 function youTubeContent(label) {
     var youTube = new YouTube();
     youTube.setKey(process.env.YOUTUBEKEY);
@@ -133,32 +157,39 @@ module.exports = function(app) {
     });
 
     function conceptData(text) {
-        return initalConceptHighlights(text).then(initialConcept => {
-            var arrayConcept = [];
-            var maxAnnotations = initialConcept.annotations.length;
-            if (maxAnnotations > 5) {
-                maxAnnotations = 5;
-            }
-            for (var i = 0; i < maxAnnotations; i++) {
-                arrayConcept.push(initialConcept.annotations[i].concept.id);
-            }
-            return topConceptAnalyze(arrayConcept).then(topConcepts => {
-                return {
-                    topConcepts: topConcepts,
-                    initialConcept: initialConcept
-                };
-            });
-        }).then(data => {
-            return topConceptData(data.topConcepts.concepts[0].concept.id).then(conceptData => {
-                data.conceptData = conceptData;
-                return data;
-            });
-        }).then(data => {
-            return youTubeContent(data.conceptData.label).then(content => {
-                data.content = content;
-                return data;
-            });
+      return testConcept(text).then(data => {
+        console.log(data.concepts[0].text);
+        return youTubeContent(data.concepts[0].text).then(content => {
+            data.content = content;
+            return data;
         });
+      });
+        // return initalConceptHighlights(text).then(initialConcept => {
+        //     var arrayConcept = [];
+        //     var maxAnnotations = initialConcept.annotations.length;
+        //     if (maxAnnotations > 5) {
+        //         maxAnnotations = 5;
+        //     }
+        //     for (var i = 0; i < maxAnnotations; i++) {
+        //         arrayConcept.push(initialConcept.annotations[i].concept.id);
+        //     }
+        //     return topConceptAnalyze(arrayConcept).then(topConcepts => {
+        //         return {
+        //             topConcepts: topConcepts,
+        //             initialConcept: initialConcept
+        //         };
+        //     });
+        // }).then(data => {
+        //     return topConceptData(data.topConcepts.concepts[0].concept.id).then(conceptData => {
+        //         data.conceptData = conceptData;
+        //         return data;
+        //     });
+        // }).then(data => {
+        //     return youTubeContent(data.conceptData.label).then(content => {
+        //         data.content = content;
+        //         return data;
+        //     });
+        // });
     }
 
     app.post('/api/watson', function(req, res) {
@@ -173,6 +204,23 @@ module.exports = function(app) {
             res.json(error);
         });
     });
+
+    // app.post('/api/watson', function(req, res) {
+    //   var parameters = {
+    //       text: req.body.text,
+    //       knowledgeGraph: 1
+    //   };
+    //
+    //   alchemy_language.concepts(parameters, function(err, response) {
+    //       if (err) {
+    //         console.log('error:', err);
+    //       }
+    //       else {
+    //         res.json(response);
+    //         console.log(JSON.stringify(response, null, 2));
+    //       }
+    //   });
+    // });
 
     app.post('/api/file', function(req, res) {
         document_conversion.convert({

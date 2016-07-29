@@ -29,7 +29,7 @@ angular.module('sampleApp').factory('NewEntry', ['$http', function($http) {
                 data: {
                     results: entryData
                 }
-            })
+            });
         },
 
         delete: function(id) {
