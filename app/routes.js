@@ -258,7 +258,7 @@ module.exports = function(app) {
             agreeableness_score: req.body.results.agreeableness_score,
             emotional_range_score: req.body.results.emotional_range_score,
             top_concept_title: req.body.results.top_concept_title,
-            top_concept_link: req.body.results.top_concept_title,
+            top_concept_link: req.body.results.top_concept_link,
             top_concept_description: req.body.results.top_concept_description,
             first_video_link: req.body.results.first_video_link,
             first_video_title: req.body.results.first_video_title,
