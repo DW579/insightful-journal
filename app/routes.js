@@ -13,12 +13,6 @@ var tone_analyzer = watson.tone_analyzer({
     version_date: '2016-05-19 '
 });
 
-var concept_insights = watson.concept_insights({
-    username: process.env.CONCEPTINSIGHTUSERNAME,
-    password: process.env.CONCEPTINSIGHTPASSWORD,
-    version: 'v2'
-});
-
 var alchemy_language = watson.alchemy_language({
     api_key: process.env.ALCHEMYLANGUAGEAPI
 });
@@ -51,56 +45,7 @@ function toneAnalyze(text) {
     });
 }
 
-function initalConceptHighlights(text) {
-    return new Promise((resolve, reject) => {
-        concept_insights.graphs.annotateText({
-                graph: '/graphs/wikipedia/en-latest',
-                text: text
-            },
-            function(err, concept) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(concept);
-                }
-            });
-    });
-}
-
-function topConceptAnalyze(arrayConcept) {
-    return new Promise((resolve, reject) => {
-        concept_insights.graphs.getRelatedConcepts({
-                graph: '/graphs/wikipedia/en-latest',
-                concepts: arrayConcept,
-                level: 0,
-                limit: 2
-            },
-            function(err, topConcept) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(topConcept);
-                }
-            });
-    });
-}
-
-function topConceptData(id) {
-    return new Promise((resolve, reject) => {
-        concept_insights.graphs.getConcept({
-                id: id
-            },
-            function(err, compared) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(compared);
-                }
-            });
-    });
-}
-
-function testConcept(text) {
+function concept(text) {
   return new Promise((resolve, reject) => {
     var parameters = {
         text: text,
@@ -109,11 +54,9 @@ function testConcept(text) {
 
     alchemy_language.concepts(parameters, function(err, concept) {
         if (err) {
-          console.log('error:', err);
           reject(err);
         }
         else {
-          console.log(JSON.stringify(concept, null, 2));
           resolve(concept);
         }
     });
@@ -152,44 +95,16 @@ module.exports = function(app) {
     app.get('/api/data', function(req, res) {
         knex('entries').select().then(function(data) {
             res.send(data);
-            // process.exit(1);
         });
     });
 
     function conceptData(text) {
-      return testConcept(text).then(data => {
-        console.log(data.concepts[0].text);
+      return concept(text).then(data => {
         return youTubeContent(data.concepts[0].text).then(content => {
             data.content = content;
             return data;
         });
       });
-        // return initalConceptHighlights(text).then(initialConcept => {
-        //     var arrayConcept = [];
-        //     var maxAnnotations = initialConcept.annotations.length;
-        //     if (maxAnnotations > 5) {
-        //         maxAnnotations = 5;
-        //     }
-        //     for (var i = 0; i < maxAnnotations; i++) {
-        //         arrayConcept.push(initialConcept.annotations[i].concept.id);
-        //     }
-        //     return topConceptAnalyze(arrayConcept).then(topConcepts => {
-        //         return {
-        //             topConcepts: topConcepts,
-        //             initialConcept: initialConcept
-        //         };
-        //     });
-        // }).then(data => {
-        //     return topConceptData(data.topConcepts.concepts[0].concept.id).then(conceptData => {
-        //         data.conceptData = conceptData;
-        //         return data;
-        //     });
-        // }).then(data => {
-        //     return youTubeContent(data.conceptData.label).then(content => {
-        //         data.content = content;
-        //         return data;
-        //     });
-        // });
     }
 
     app.post('/api/watson', function(req, res) {
@@ -204,23 +119,6 @@ module.exports = function(app) {
             res.json(error);
         });
     });
-
-    // app.post('/api/watson', function(req, res) {
-    //   var parameters = {
-    //       text: req.body.text,
-    //       knowledgeGraph: 1
-    //   };
-    //
-    //   alchemy_language.concepts(parameters, function(err, response) {
-    //       if (err) {
-    //         console.log('error:', err);
-    //       }
-    //       else {
-    //         res.json(response);
-    //         console.log(JSON.stringify(response, null, 2));
-    //       }
-    //   });
-    // });
 
     app.post('/api/file', function(req, res) {
         document_conversion.convert({
