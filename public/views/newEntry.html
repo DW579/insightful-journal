@@ -47,21 +47,6 @@
 
     <div class="row" ng-hide="view.switch">
         <div class="row">
-            <form ng-submit="fileUpload()" class="col s5 offset-s7">
-                <div class="file-field input-field">
-                    <div class="btn right" ng-style="{'background-color': '#83969D'}">
-                        <span>Folder</span>
-                        <input id="fileItem" type="file" webkitdirectory>
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" ng-model="view.file" type="text">
-                    </div>
-                </div>
-                <button class="btn waves-effect waves-light right" type="submit" name="action" ng-style="{'background-color': '#83969D'}">Upload Folder with File</button>
-            </form>
-        </div>
-
-        <div class="row">
             <form class="col s12" ng-submit="toneAnalyze()">
                 <div class="row">
                     <div class="input-field col s6">
