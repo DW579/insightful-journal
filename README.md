@@ -19,6 +19,7 @@ Github Link: https://github.com/DW579/insightful-journal
 
 ### APIs Used:
 * IBM Watson AI API
+* Google Charts API
 * Youtube
 
 The technology behind the analysis is based on IBM's Watson API created by using the modern theories and research from psycholinguistics. The tone results that are received from the analysis of the text run through a comparison method and provide relevant information to the user to see how they write or how others write. The details of the tone results are as follows:
