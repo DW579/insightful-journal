@@ -10,7 +10,7 @@ var tone_analyzer = watson.tone_analyzer({
     username: process.env.TONEANALYZERUSERNAME,
     password: process.env.TONEANALYZERPASSWORD,
     version: 'v3',
-    version_date: '2016-05-19 '
+    version_date: '2016-05-19'
 });
 
 var alchemy_language = watson.alchemy_language({
