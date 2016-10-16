@@ -156,9 +156,12 @@
             </div>
 
             <div class="row" ng-show="view.highestEmotionTitle !== view.userEmotion && view.journal === 'yes'">
-                <h3>Please further explain the difference</h3>
-                <span>There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference.</span>
-                <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>
+                <h3><i class="small material-icons">warning</i>The Emotions Don't Match Up!</h3>
+                <div class="card-panel" ng-style="{'background-color': '#F1E0C3'}">
+                    <span class="black-text" ng-style="{'font-size': '17px'}">There is a difference between what you selected as you feel today and the entry that you wrote. Please explain further this difference. Please enter your explanation below:</span>
+                    <span>You stated you feel "{{ view.userEmotion }}" today. Watson anazlyed your entry and finds that the text represents the feeling of "{{ view.highestEmotionTitle }}".</span>
+                </div>
+
 
                 <div class="row">
                     <div class="input-field col s12">
