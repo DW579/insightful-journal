@@ -68,13 +68,23 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         $location.path(path);
     };
 
+    $('#intro').openModal({
+        dismissible: true,
+        opacity: .5,
+        in_duration: 500,
+        out_duration: 300,
+        starting_top: '4%',
+        ending_top: '10%'
+    });
+
+
     $scope.journalAnswer = function() {
         if ($scope.view.journal === 'yes') {
             $(document).ready(function() {
                 $('#modal1').openModal({
                     dismissible: false,
                     opacity: .5,
-                    in_duration: 400,
+                    in_duration: 500,
                     out_duration: 300
                 });
             });
@@ -97,7 +107,7 @@ function NewEntryController($scope, $http, $location, NewEntry) {
     $scope.toneAnalyze = function() {
         var inputText = $scope.view.text;
         NewEntry.createWatson(inputText).then(function(result) {
-          console.log(result);
+                console.log(result);
                 $scope.view.angerScore = result.data.tone.document_tone.tone_categories[0].tones[0].score;
                 $scope.view.angerScore /= Math.pow(100, -1);
                 $scope.view.angerScore = Math.round($scope.view.angerScore);
