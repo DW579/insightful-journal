@@ -68,6 +68,12 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         $location.path(path);
     };
 
+    $(document).ready(function(){
+      $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
+    });
+
     $('#intro').openModal({
         dismissible: true,
         opacity: .5,

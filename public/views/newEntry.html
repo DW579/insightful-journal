@@ -5,12 +5,11 @@
             <p>Insightful Journal is a journaling application with analytics. A user can perform an in-depth analysis of their journal entries to better understand how their writing comes across. The app provides feedback on the personality of the entries, as well as the language, social and emotional tones. To help the user dive deeper into their topic, the app provides DBpedia definitions and related TED Talks. This application is to help spree ideas and provide a greater understanding of the user's tone of writing.</p>
             <p>Each step of the way, there will be instructions of which actions you can take and what results you can expect. I hope you enjoy this application and find some new insights to your writing! (Click out of the box to continue)</p>
         </div>
-        <div class="modal-footer">
-        </div>
     </div>
 
     <div class="row" ng-show="view.switch">
         <h3>Will this be for your Journal?</h3>
+        <p><i class="tiny material-icons">info_outline</i>If you want to compare the difference between how you feel and the results you receive from the anaylis of your text from IBM Watson, select "Yes" below. If you want to do a quick example, select "No" below.</p>
         <p>
             <input name="group1" type="radio" id="yes" value="yes" ng-model="view.journal" class="validate" />
             <label for="yes">Yes</label>
@@ -56,6 +55,19 @@
     </div>
 
     <div class="row" ng-hide="view.switch">
+      <div class="card-panel" ng-style="{'background-color': '#F1E0C3'}">
+          <span class="black-text" ng-style="{'font-size': '17px'}">On this page you be able to input the text you would like to analyze. To receive the best results, submit between two to three paragraphs of text. Or you can use the example text found in the drop down below.</span>
+      </div>
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">description</i>Click Here for Example Text</div>
+          <div class="collapsible-body"><p>A Moore’s-like growth curve requires an infinitesimal number of intermediate steps of improvement. Each year’s CPU, airplane, or automobile is slightly better than last year’s. As economies of scale lower costs, the market expands.
+
+          In contrast to computers and cars, technologies with which Musk is familiar, rockets cannot be systematically improved. Specific impulse—the number of pounds of thrust produced per pound of propellant—is the key parameter capable of producing significant cost reductions in access to space. Technological solutions to improving specific impulse include building lighter rockets or finding better fuels. And rocket scientists optimized both of those when Eisenhower was president. That leaves the physics problem: Mass versus gravity. The only way to work around it is through economies of scale, driving down operational costs through an increased launch tempo.
+
+        The problem with economy of scale is it relies on demand. SpaceX’s current launch tempo owes a lot to commercial satellite launches. Information is space’s biggest market. Naively, one might have hoped that the growth in satellite communications would have increased demand, and thus launch tempo, driving down prices. But the capacity increase was, ironically, eaten up by Moore’s Law—which allows satellites to transmit more information. Communications satellites have not significantly increased the demand for mass to orbit.</p></div>
+        </li>
+      </ul>
         <div class="row">
             <form class="col s12" ng-submit="toneAnalyze()">
                 <div class="row">
@@ -67,7 +79,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea ng-model='view.text' id="textarea1" class="materialize-textarea"></textarea>
-                        <label for="textarea1">Enter your new entry below</label>
+                        <label for="textarea1">Enter two to three paragraphs of text below</label>
                     </div>
                 </div>
                 <button ng-click="view.loader = true" class="btn waves-effect waves-light" type="submit" name="action" ng-style="{'background-color': '#C1AC8E'}">Analyze Entry</button>
@@ -197,7 +209,7 @@
 
             <div class="row">
                 <div class="col s12">
-                    <h5>First Video</h5>
+                    <h5>First TED Talk Video Related to Top Concept</h5>
                     <div class="card">
                         <div class="card-image">
                             <anguvideo ng-model="view.firstVideoId" width="100%" height="400"></anguvideo>
@@ -212,7 +224,7 @@
 
             <div class="row">
                 <div class="col s12">
-                    <h5>Second Video</h5>
+                    <h5>Second TED Talk Video Related to Top Concept</h5>
                     <div class="card">
                         <div class="card-image">
                             <anguvideo ng-model="view.secondVideoId" width="100%" height="400"></anguvideo>
