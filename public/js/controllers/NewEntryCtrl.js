@@ -68,20 +68,28 @@ function NewEntryController($scope, $http, $location, NewEntry) {
         $location.path(path);
     };
 
-    $(document).ready(function(){
-      $('.collapsible').collapsible({
-        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-      });
+    $(document).ready(function() {
+        $('.collapsible').collapsible({
+            accordion: false
+        });
     });
 
-    $('#intro').openModal({
-        dismissible: true,
-        opacity: .5,
-        in_duration: 500,
-        out_duration: 300,
-        starting_top: '4%',
-        ending_top: '10%'
-    });
+    $scope.openText = function() {
+        $(document).ready(function() {
+            $('#intro').openModal({
+                dismissible: false,
+                opacity: .5,
+                in_duration: 500,
+                out_duration: 300,
+                starting_top: '4%',
+                ending_top: '10%'
+            });
+        });
+    };
+
+    $scope.closeText = function() {
+        $('#intro').closeModal();
+    };
 
 
     $scope.journalAnswer = function() {

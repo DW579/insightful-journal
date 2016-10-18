@@ -1,9 +1,12 @@
-<div class="container" ng-controller="NewEntryController">
+<div class="container" ng-controller="NewEntryController" ng-init="openText()">
     <div id="intro" class="modal">
         <div class="modal-content">
             <h4>Welcome to Insightful Journal!</h4>
             <p>Insightful Journal is a journaling application with analytics. A user can perform an in-depth analysis of their journal entries to better understand how their writing comes across. The app provides feedback on the personality of the entries, as well as the language, social and emotional tones. To help the user dive deeper into their topic, the app provides DBpedia definitions and related TED Talks. This application is to help spree ideas and provide a greater understanding of the user's tone of writing.</p>
             <p>Each step of the way, there will be instructions of which actions you can take and what results you can expect. I hope you enjoy this application and find some new insights to your writing! (Click out of the box to continue)</p>
+        </div>
+        <div class="modal-footer">
+          <a ng-click="closeText()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
 
