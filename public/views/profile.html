@@ -1,9 +1,18 @@
-<div ng-controller="ProfileController" ng-init="allData(); filterFolder = 'journal'">
+<div ng-controller="ProfileController" ng-init="allData(); filterFolder = 'journal'; openSum()">
+  <div id="summery" class="modal">
+      <div class="modal-content">
+          <h4>Welcome to Insightful Journal!</h4>
+          <p>Insightful Journal is a journaling application with analytics. A user can perform an in-depth analysis of their journal entries to better understand how their writing comes across. The app provides feedback on the personality of the entries, as well as the language, social and emotional tones. To help the user dive deeper into their topic, the app provides DBpedia definitions and related TED Talks. This application is to help spree ideas and provide a greater understanding of the user's tone of writing.</p>
+          <p>Each step of the way, there will be instructions of which actions you can take and what results you can expect. I hope you enjoy this application and find some new insights to your writing! (Click out of the box to continue)</p>
+      </div>
+      <div class="modal-footer">
+        <a ng-click="closeSum()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+  </div>
     <div class="row">
         <div class="col s4">
             <ul class="tabs z-depth-1">
                 <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'journal'; drawJournal()">Journal</a></li>
-                <!-- <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'notebook'; drawNotebook()">Notebook</a></li> -->
                 <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'job'; drawJob()">Business</a></li>
                 <li class="tab col s3"><a ng-style="{'color': '#CE4D45'}" ng-click="filterFolder = 'ideas'; drawIdeas()">Ideas</a></li>
             </ul>

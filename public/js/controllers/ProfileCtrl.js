@@ -113,6 +113,23 @@ function ProfileController($scope, $http, Profile) {
         ideasOverallSocial: ''
     };
 
+    $scope.openSum = function() {
+        $(document).ready(function() {
+            $('#summery').openModal({
+                dismissible: false,
+                opacity: .5,
+                in_duration: 500,
+                out_duration: 300,
+                starting_top: '4%',
+                ending_top: '10%'
+            });
+        });
+    };
+
+    $scope.closeSum = function() {
+        $('#summery').closeModal();
+    };
+
     $(document).ready(function() {
         $('ul.tabs').tabs();
     });
