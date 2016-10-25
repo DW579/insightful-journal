@@ -1,15 +1,18 @@
 <div ng-controller="ProfileController" ng-init="allData(); filterFolder = 'journal'; openSum()">
-  <div id="summery" class="modal">
-      <div class="modal-content">
-          <h4>Welcome to Dashboard</h4>
-          <p>Here is where you will be able to view all past entries that have been submitted to one of the three folders: 'Journal', 'Bussiness', or 'Ideas'. As you view each folder, that folder will have all the entries stored within it analyzed by IBM Watson AI as a collective to present you with the overall personality, Language tone, and Social tone, not just an individual entry as on the 'New Entry' page. Each result will be further explained by either hovering over it or clicking it.</p>
-          <p>You can also click through the individual results of each article found within the respective folders. You may do this by selecting 'View Entry'. This will change the dashboard on the right side to show the original document that was analyzed and the following results of its emotional tones, top concepts, and the related TED Talk videos to the top concept. You can return back to the main dashboard information for that folder by selecting the 'Back' button at the top.</p>
-          <p>I hope you enjoy the Insightful Journal dashboard and find any new insights that you may not have thought of before!</p>
-      </div>
-      <div class="modal-footer">
-        <a ng-click="closeSum()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-      </div>
-  </div>
+    <div id="summery" class="modal">
+        <div class="modal-content">
+            <h4>Welcome to the Dashboard!</h4>
+            <p>Here is where you will be able to view all past entries that have been submitted to one of the three folders: 'Journal,' 'Bussiness,' or 'Ideas.' As you view each folder, that folder will have all the entries stored within it analyzed by IBM
+                Watson AI as a collective to present you with the overall personality, Language tone, and Social tone, not just an individual entry as on the 'New Entry' page. Each result will be further explained by either hovering over it or clicking
+                it.</p>
+            <p>You can also click through the individual results of each article found within the respective folders. You may do this by selecting 'View Entry.' This will change the dashboard on the right side to show the original document that was analyzed,
+                and the following results of its emotional tones, top concepts, and the related TED Talk videos to the top concept. You can return to the main dashboard information for that folder by selecting the 'Back' button at the top.</p>
+            <p>I hope you enjoy the Insightful Journal dashboard and find any new insights that you may not have thought of before!</p>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="closeSum()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
     <div class="row">
         <div class="col s4">
             <ul class="tabs z-depth-1">

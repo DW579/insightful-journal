@@ -2,13 +2,15 @@
     <div id="intro" class="modal">
         <div class="modal-content">
             <h4>Welcome to Insightful Journal!</h4>
-            <p>Research shows that journaling is very beneficial for health and provides a way to reflect on one’s life. I wanted to create a smart journal that provides a person with feedback that can help them improve their life. During my research, I was amazed by the capabilities of IBM Watson software and implemented their API into my project.</p>
-            <p>As a result, you can enter your journal entry, and this app will analyze your tone of speech to provide you with results on how your speech comes across to others. Each entry will also get recommendations on a related DBpedia pages and TED talks to explore their idea further.</p>
+            <p>Research shows that journaling is very beneficial for health and provides a way to reflect on one’s life. I wanted to create a smart journal that provides a person with feedback that can help them improve their life. During my research, I
+                was amazed by the capabilities of IBM Watson software and implemented their API into my project.</p>
+            <p>As a result, you can enter your journal entry, and this app will analyze your tone of speech to provide you with results on how your speech comes across to others. Each entry will also get recommendations on a related DBpedia pages and TED
+                talks to explore their idea further.</p>
             <p>Each step of the way, there will be instructions on which actions to take next and what results you can expect. I hope you enjoy this application and find some new insights into your writing!</p>
             <p>Please Note: this is still a beta version of the program. Also in the works are a few exciting features like voice recognition and face recognition.</p>
         </div>
         <div class="modal-footer">
-          <a ng-click="closeText()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            <a ng-click="closeText()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
 
@@ -60,19 +62,23 @@
     </div>
 
     <div class="row" ng-hide="view.switch">
-      <div class="card-panel" ng-style="{'background-color': '#F1E0C3'}">
-          <span class="black-text" ng-style="{'font-size': '17px'}">On this page, you can input the text you would like to analyze. For the application to work correctly, please submit between two to three paragraphs of text. Or you can use the example text found in the drop down below to test how the application works.</span>
-      </div>
-      <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">description</i>Click Here for Example Text</div>
-          <div class="collapsible-body"><p>A Moore’s-like growth curve requires an infinitesimal number of intermediate steps of improvement. Each year’s CPU, airplane, or automobile is slightly better than last year’s. As economies of scale lower costs, the market expands.
-
-          In contrast to computers and cars, technologies with which Musk is familiar, rockets cannot be systematically improved. Specific impulse—the number of pounds of thrust produced per pound of propellant—is the key parameter capable of producing significant cost reductions in access to space. Technological solutions to improving specific impulse include building lighter rockets or finding better fuels. And rocket scientists optimized both of those when Eisenhower was president. That leaves the physics problem: Mass versus gravity. The only way to work around it is through economies of scale, driving down operational costs through an increased launch tempo.
-
-        The problem with economy of scale is it relies on demand. SpaceX’s current launch tempo owes a lot to commercial satellite launches. Information is space’s biggest market. Naively, one might have hoped that the growth in satellite communications would have increased demand, and thus launch tempo, driving down prices. But the capacity increase was, ironically, eaten up by Moore’s Law—which allows satellites to transmit more information. Communications satellites have not significantly increased the demand for mass to orbit.</p></div>
-        </li>
-      </ul>
+        <div class="card-panel" ng-style="{'background-color': '#F1E0C3'}">
+            <span class="black-text" ng-style="{'font-size': '17px'}">On this page, you can input the text you would like to analyze. For the application to work correctly, please submit between two to three paragraphs of text. Or you can use the example text found in the drop down below to test how the application works.</span>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">description</i>Click Here for Example Text</div>
+                <div class="collapsible-body">
+                    <p>A Moore’s-like growth curve requires an infinitesimal number of intermediate steps of improvement. Each year’s CPU, airplane, or automobile is slightly better than last year’s. As economies of scale lower costs, the market expands.
+                        In contrast to computers and cars, technologies with which Musk is familiar, rockets cannot be systematically improved. Specific impulse—the number of pounds of thrust produced per pound of propellant—is the key parameter capable
+                        of producing significant cost reductions in access to space. Technological solutions to improving specific impulse include building lighter rockets or finding better fuels. And rocket scientists optimized both of those when Eisenhower
+                        was president. That leaves the physics problem: Mass versus gravity. The only way to work around it is through economies of scale, driving down operational costs through an increased launch tempo. The problem with economy of scale
+                        is it relies on demand. SpaceX’s current launch tempo owes a lot to commercial satellite launches. Information is space’s biggest market. Naively, one might have hoped that the growth in satellite communications would have increased
+                        demand, and thus launch tempo, driving down prices. But the capacity increase was, ironically, eaten up by Moore’s Law—which allows satellites to transmit more information. Communications satellites have not significantly increased
+                        the demand for mass to orbit.</p>
+                </div>
+            </li>
+        </ul>
         <div class="row">
             <form class="col s12" ng-submit="toneAnalyze()">
                 <div class="row">
@@ -248,10 +254,6 @@
                     <input name="group3" type="radio" id="journal" value="journal" ng-model="view.folder" />
                     <label for="journal">Journal</label>
                 </p>
-                <!-- <p>
-            <input name="group3" type="radio" id="notebook" value="notebook" ng-model="view.folder" />
-            <label for="notebook">Notebook</label>
-          </p> -->
                 <p>
                     <input name="group3" type="radio" id="job" value="job" ng-model="view.folder" />
                     <label for="job">Business</label>
