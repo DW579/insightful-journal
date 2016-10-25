@@ -46,21 +46,20 @@ function toneAnalyze(text) {
 }
 
 function concept(text) {
-  return new Promise((resolve, reject) => {
-    var parameters = {
-        text: text,
-        knowledgeGraph: 1
-    };
+    return new Promise((resolve, reject) => {
+        var parameters = {
+            text: text,
+            knowledgeGraph: 1
+        };
 
-    alchemy_language.concepts(parameters, function(err, concept) {
-        if (err) {
-          reject(err);
-        }
-        else {
-          resolve(concept);
-        }
+        alchemy_language.concepts(parameters, function(err, concept) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(concept);
+            }
+        });
     });
-  });
 }
 
 function youTubeContent(label) {
@@ -99,12 +98,12 @@ module.exports = function(app) {
     });
 
     function conceptData(text) {
-      return concept(text).then(data => {
-        return youTubeContent(data.concepts[0].text).then(content => {
-            data.content = content;
-            return data;
+        return concept(text).then(data => {
+            return youTubeContent(data.concepts[0].text).then(content => {
+                data.content = content;
+                return data;
+            });
         });
-      });
     }
 
     app.post('/api/watson', function(req, res) {
