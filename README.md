@@ -5,6 +5,7 @@ ___Insightful Journal___
 Insightful Journal is a journaling application with analytics. A user can perform an in-depth analysis of their journal entries to better understand how their writing comes across. The app provides feedback on the personality of the entries, as well as the language, social and emotional tones. To help the user dive deeper into their topic, the app provides Wikipedia definitions and related TED Talks. This application is to help spree ideas and provide a greater understanding of the user's tone of writing.
 
 YouTube Link: https://www.youtube.com/watch?v=84fS1JMkR0Y&index=11&list=PLM_i0obccy3un-9j53tz1wiC28a4Asi99
+
 Github Link: https://github.com/DW579/insightful-journal
 
 ### Technologies Used:
